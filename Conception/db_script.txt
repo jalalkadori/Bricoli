@@ -1,5 +1,5 @@
 CREATE TABLE ADMIN(
-   id_admin COUNTER,
+   id_admin  int AUTO_INCREMENT,
    nom_admin VARCHAR(50),
    prenom_admin VARCHAR(50),
    email_admin VARCHAR(120),
@@ -9,7 +9,7 @@ CREATE TABLE ADMIN(
 );
 
 CREATE TABLE BRICOLEUR(
-   id_bricoleur COUNTER,
+   id_bricoleur  int AUTO_INCREMENT,
    nom_bricoleur VARCHAR(50),
    prenom_bricoleur VARCHAR(50),
    tele_bricoleur VARCHAR(10),
@@ -26,7 +26,7 @@ CREATE TABLE BRICOLEUR(
 );
 
 CREATE TABLE CHERCHEUR(
-   id_chercheur COUNTER,
+   id_chercheur  int AUTO_INCREMENT,
    nom_chercheur VARCHAR(50),
    prenom_chercheur VARCHAR(50),
    tele_chercheur VARCHAR(10),
@@ -38,7 +38,7 @@ CREATE TABLE CHERCHEUR(
 );
 
 CREATE TABLE Realisations(
-   id_realisation COUNTER,
+   id_realisation  int AUTO_INCREMENT,
    titre_realisation VARCHAR(120),
    description_realisation VARCHAR(255),
    img_realisation VARCHAR(50),
