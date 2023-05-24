@@ -1,0 +1,58 @@
+CREATE TABLE ADMIN(
+   id_admin COUNTER,
+   nom_admin VARCHAR(50),
+   prenom_admin VARCHAR(50),
+   email_admin VARCHAR(120),
+   mdp_admin VARCHAR(255),
+   tele_admin VARCHAR(10),
+   PRIMARY KEY(id_admin)
+);
+
+CREATE TABLE BRICOLEUR(
+   id_bricoleur COUNTER,
+   nom_bricoleur VARCHAR(50),
+   prenom_bricoleur VARCHAR(50),
+   tele_bricoleur VARCHAR(10),
+   cin_bricoleur VARCHAR(10),
+   adresse_bricoleur VARCHAR(50),
+   ville_bricoleur VARCHAR(50),
+   img_profile VARCHAR(50),
+   cin_img_bricoleur VARCHAR(50),
+   email VARCHAR(120),
+   mdp_bricoleur VARCHAR(255),
+   id_admin INT,
+   PRIMARY KEY(id_bricoleur),
+   FOREIGN KEY(id_admin) REFERENCES ADMIN(id_admin)
+);
+
+CREATE TABLE CHERCHEUR(
+   id_chercheur COUNTER,
+   nom_chercheur VARCHAR(50),
+   prenom_chercheur VARCHAR(50),
+   tele_chercheur VARCHAR(10),
+   adresse_chercheur VARCHAR(255),
+   ville_chercheur VARCHAR(50),
+   email_chercheur VARCHAR(120),
+   mdp_chercheur VARCHAR(255),
+   PRIMARY KEY(id_chercheur)
+);
+
+CREATE TABLE Realisations(
+   id_realisation COUNTER,
+   titre_realisation VARCHAR(120),
+   description_realisation VARCHAR(255),
+   img_realisation VARCHAR(50),
+   id_bricoleur INT NOT NULL,
+   PRIMARY KEY(id_realisation),
+   FOREIGN KEY(id_bricoleur) REFERENCES BRICOLEUR(id_bricoleur)
+);
+
+CREATE TABLE evaluation(
+   id_chercheur INT,
+   id_realisation INT,
+   commentaire_evaluation VARCHAR(50),
+   evaluation_note INT,
+   PRIMARY KEY(id_chercheur, id_realisation),
+   FOREIGN KEY(id_chercheur) REFERENCES CHERCHEUR(id_chercheur),
+   FOREIGN KEY(id_realisation) REFERENCES Realisations(id_realisation)
+);
