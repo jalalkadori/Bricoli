@@ -56,3 +56,16 @@ CREATE TABLE evaluation(
    FOREIGN KEY(id_chercheur) REFERENCES CHERCHEUR(id_chercheur),
    FOREIGN KEY(id_realisation) REFERENCES Realisations(id_realisation)
 );
+
+CREATE TABLE Article(
+   Id_Article int AUTO_INCREMENT,
+   Titre_article VARCHAR(120),
+   corp_article VARCHAR(8000),
+   categorie_acticle VARCHAR(50),
+   date_publication DATE,
+   ecrivain_nom VARCHAR(50),
+   id_admin INT NOT NULL,
+   PRIMARY KEY(Id_Article),
+   FOREIGN KEY(id_admin) REFERENCES ADMIN(id_admin)
+);
+
