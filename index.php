@@ -1,3 +1,8 @@
+<?php 
+include("./db_connection.php");
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,90 +10,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Brikoli</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <style>
-    .card3 {
-        position: relative;
-      width: 300px;
-    }
-
- 
-
-    .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 10px;
-}
-
-.gallery-item {
-  position: relative;
-  overflow: hidden;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: auto;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.gallery-item:hover .overlay {
-  opacity: 1;
-}
-
-.overlay h3 {
-  color: #fff;
-  font-size: 18px;
-  text-align: center;
-}
-  </style>
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
   <body>
     <header class="container">
         <nav class="navbar navbar-expand-lg bg-body-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Brikoli</a>
+            <div class="container">
+                <a class="navbar-brand" href="./index.php">Bricoli</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        
+                    </ul>
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
                 </div>
             </div>
         </nav>
@@ -138,7 +99,7 @@
                 <h2 class="my-4">Quel type de services recherchez-vous ?</h2>
                 <div class="row row-cols-lg-3 my-3">
                     <?php
-                        for ($x = 0; $x < 9; $x++) {
+                        for ($x = 0; $x < 6; $x++) {
                             echo '
                                 <div class="col mb-3">
                                     <div class="card card3 border-0">
@@ -208,8 +169,8 @@
         <section class="container-fluid py-5">
             <div class="container">
                 <h2>Brico Blog</h2>
-                <div class="row align-items-stretch">
-                    <div class="col-md-8 border ">
+                <div class="row row-cols-lg-2">
+                    <div class="col border ">
                         <div class="">
                             <div class="card">
                                 <img src="./images/peinture.jpg" class="card-img-top" alt="...">
@@ -218,56 +179,23 @@
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
-                    <div class="col-md-4 border">
-                        <div class="row align-items-center">
-                            <div class="col-md-12 border">
-                                <div class="">
-                                    <div class="card" >
-                                        <img src="./images/peinture.jpg" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 border">
-                                <div class="">
-                                    <div class="card" >
-                                        <img src="./images/peinture.jpg" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        </div>
-                                    </div>
+                    <div class="col border ">
+                        <div class="">
+                            <div class="card">
+                                <img src="./images/peinture.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
                 <p class="text-end">Voir tous les articles</p>
             </div>
         </section>
 
-        <div class="gallery">
-        <div class="gallery-item">
-            <img src="./images/peinture.jpg" alt="Image 1">
-            <div class="overlay">
-            <h3>Image 1</h3>
-            </div>
-        </div>
-        
-        <div class="gallery-item">
-            <img src="image2.jpg" alt="Image 2">
-            <div class="overlay">
-            <h3>Image 2</h3>
-            </div>
-        </div>
-        
-        <!-- Add more gallery items as needed -->
-        </div>
-
+       
     </main>
 
     <footer class="container-fluid bg-dark py-5">
