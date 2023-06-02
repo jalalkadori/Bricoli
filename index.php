@@ -1,5 +1,5 @@
 <?php 
-include("./db_connection.php");
+    include("./db_connection.php");
 
 ?>
 
@@ -8,45 +8,43 @@ include("./db_connection.php");
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Brikoli</title>
+    <title>Bricoli</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/index.css">
+    <script src="https://kit.fontawesome.com/75c6b1327b.js" crossorigin="anonymous"></script>
 </head>
   <body>
-    <header class="container">
+    <header class="container-fluid">
         <nav class="navbar navbar-expand-lg bg-body-light">
-            <div class="container">
-                <a class="navbar-brand" href="./index.php">Bricoli</a>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="./index.php">
+                    <img src="./logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="200">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse fw-semibold text-uppercase" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">HOME</a>
+                            <a class="nav-link" href="#blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="#">Contactez-Nous</a> 
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        
                     </ul>
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
+                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+                            <i class="fa-solid fa-right-to-bracket"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="#">Bricoleur</a></li>
+                                <li><a class="dropdown-item" href="#">Chercheur</a></li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Devenir Bricoleur</a>
                         </li>
                     </ul>
                     
@@ -56,32 +54,33 @@ include("./db_connection.php");
     </header>
 
     <main>
-        <section class="container-fluid bg-primary slide py-5">
-            <div class="container d-flex flex-column justify-centent-end align-items-center py-5">
+        <section class="container-fluid slide py-5" id="slide">
+            <div class="d-flex flex-column justify-centent-end align-items-center py-5">
                 <h1 class="py-3">Besoin d'aide ?</h1>
                 <h2 class="py-3">Trouvez un bricoleur proche de chez vous</h2>
-                <button class="btn btn-light">Trouver un bricoleur</button>
+                <a href="#services" class="btn btn-light slide-btn">Trouver un bricoleur</a>
             </div>
         </section>
 
-        <section class="container-fluid py-5 bg-warning-subtle">
+        <section class="container-fluid py-5" id="bricoleurDuMoi">
             <div class="container">
-                <h2 class="py-3">Bricoleurs du mois de <strong>Mai</strong></h2>
+                <h2 class="py-3">Bricoleurs du mois de Mai</h2>
                 <div class="row row-cols-lg-3">
                     <?php
                         for ($x = 0; $x < 3; $x++) {
                             echo '
                                 <div class="col">
-                                    <div class="card">
+                                    <div class="card border border-0 bg-transparent">
                                         <div class="row g-0">
                                             <div class="col-md-4">
-                                            <img src="./images/peinture.jpg" alt="Card Image" class="img-fluid">
+                                                <img src="./images/peinture.jpg" alt="Card Image" class="img-fluid">
                                             </div>
-                                            <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">bricoleur Nom</h5>
-                                                <p class="card-text">Description</p>
-                                            </div>
+                                            <div class="col-md-8 ">
+                                                <div class="card-body ">
+                                                    <h5 class="card-title">bricoleur Nom</h5>
+                                                    <h6 class="card-title">rating</h6>
+                                                    <p class="card-text text-center">Description</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -93,7 +92,7 @@ include("./db_connection.php");
             </div>
         </section>
 
-        <section class="container my-5">
+        <section class="container my-5" id="services">
             <div class="d-flex flex-column align-items-center">
                 <h3>Je recherche un bricoleur</h3>
                 <h2 class="my-4">Quel type de services recherchez-vous ?</h2>
@@ -166,7 +165,7 @@ include("./db_connection.php");
             </div>
         </section>
 
-        <section class="container-fluid py-5">
+        <section class="container-fluid py-5" id="blog">
             <div class="container">
                 <h2>Brico Blog</h2>
                 <div class="row row-cols-lg-2">

@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap');
+* {
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+}
+
+/* slide section */
+#slide {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: url(../images/slide2.jpg)
+}
+
+#slide h1 {
+  color : #FFCB09;
+  font-size: 4.5rem;
+  font-weight: 700;
+
+}
+#slide h2 {
+  color : #FFF;
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+.slide-btn {
+  border: 2px solid #FFCB09;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; 
+}
+/* slide section styling end */
+
+
+/* bricoleurDuMoi section styling start  */
+
+#bricoleurDuMoi {
+  background: #f8f7f7;
+}
+/* bricoleurDuMoi section styling end */
+
+/* services section styling start  */
+
+#services h3{
+  font-size: 2rem;
+  font-weight: 700;
+}
+#services h2{
+  font-size: 3rem;
+  font-weight: 300;
+}
+.card3 {
+    position: relative;
+    width: 300px;
+}
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.overlay button{
+  border: 2px solid #FFCB09;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; 
+}
+/* services section styling end */
+
+
+/* Media query screen under 720px*/
+@media screen and (max-width: 720px) {
+  #slide h1 {
+    font-size: 1.5rem; 
+    /* Adjust the font size for smaller screens */
+  }
+  #slide h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+  
+  }
+}
