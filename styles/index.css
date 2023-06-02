@@ -2,7 +2,20 @@
 * {
   box-sizing: border-box;
   font-family: 'Rubik', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
+}
+h3{
+  font-size: 2rem;
+  font-weight: 700;
+}
+h2{
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+.yellow-text{
+  color : #FFCB09;
+  font-size: 3rem;
+  font-weight: 400;
 }
 
 /* slide section */
@@ -39,7 +52,7 @@
 
 /* bricoleurDuMoi section styling start  */
 
-#bricoleurDuMoi {
+.light-background {
   background: #f8f7f7;
 }
 /* bricoleurDuMoi section styling end */
@@ -65,15 +78,25 @@
   transform: translate(-50%, -50%);
 }
 .overlay button{
-  border: 2px solid #FFCB09;
   border-radius: 25px;
-  padding: 10px 20px;
+  padding: 5px 25px;
   font-size: 1rem;
   font-weight: 400;
   cursor: pointer;
   transition: all 0.3s ease-in-out; 
 }
+.card-hover-scale:hover {
+  transform: scale(0.95);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+
 /* services section styling end */
+
+/* procedures section styling end */
+
+/* procedures section styling end */
 
 
 /* Media query screen under 720px*/

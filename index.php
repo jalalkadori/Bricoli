@@ -36,7 +36,7 @@
                         
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-right-to-bracket"></i>
+                                Se connecter <i class="fa-solid fa-right-to-bracket"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Bricoleur</a></li>
@@ -62,7 +62,7 @@
             </div>
         </section>
 
-        <section class="container-fluid py-5" id="bricoleurDuMoi">
+        <section class="container-fluid py-5 light-background" id="bricoleurDuMoi">
             <div class="container">
                 <h2 class="py-3">Bricoleurs du mois de Mai</h2>
                 <div class="row row-cols-lg-3">
@@ -98,68 +98,145 @@
                 <h2 class="my-4">Quel type de services recherchez-vous ?</h2>
                 <div class="row row-cols-lg-3 my-3">
                     <?php
-                        for ($x = 0; $x < 6; $x++) {
-                            echo '
-                                <div class="col mb-3">
-                                    <div class="card card3 border-0">
-                                        <div class="d-flex flex-column align-items-center gap-4">
-                                            <img src="./images/peinture.jpg" class="card-img-top" alt="Image">
-                                        </div>
-                                        <div class="overlay">
-                                            <button class="btn btn-primary">Click Me</button>
-                                        </div>
+                    $category = array(
+                        array(
+                                "img" => "peinture.jpg",
+                                "color" => "btn-primary",
+                                "category" => "Peinture"
+                            ),
+                            array(
+                                "img" => "Plomberie.jpg",
+                                "color" => "btn-secondary",
+                                "category" => "Plomberie"
+                            ),
+                            array(
+                                "img" => "Electricité.jpg",
+                                "color" => "btn-danger",
+                                "category" => "Electricité"
+                            ),
+                            array(
+                                "img" => "Carrelage.jpg",
+                                "color" => "btn-success",
+                                "category" => "Carrelage"
+                            ),
+                            array(
+                                "img" => "Electroménager.jpg",
+                                "color" => "btn-warning",
+                                "category" => "Electroménager"
+                            ),
+                            array(
+                                "img" => "Motage de meubles.jpg",
+                                "color" => "btn-dark",
+                                "category" => "Motage de meubles"
+                            )
+                        );
+
+                    for ($x = 0; $x < count($category); $x++) {
+                        $imgSrc = $category[$x]['img'];
+                        $buttonColor = $category[$x]['color'];
+                        $categoryName = $category[$x]['category'];
+                    
+                        echo '
+                            <div class="col mb-3 d-flex justify-content-center">
+                                <div class="card card3 border-0 card-hover-scale">
+                                    <div class="d-flex flex-column align-items-center gap-4">
+                                        <img src="./images/' . $imgSrc . '" class="card-img-top" alt="Image">
+                                    </div>
+                                    <div class="overlay">
+                                        <button class="btn ' . $buttonColor . '">' . $categoryName . '</button>
                                     </div>
                                 </div>
-                            ';
-                        }
+                            </div>
+                        ';
+                    }
                     ?>
                 </div>
             </div>
         </section>
 
-        <section class="container-fluid my-5 bg-danger-subtle">
+        <section class="container-fluid my-5 light-background" id="procedures">
             <div class="container d-flex flex-column align-items-center py-5">
                 <h3>Comment ça marche ?</h3>
-                <h2 class="my-4">Pour tous vos petits travaux, il y a Brikoli</h2>
+                <h2 class="my-4">Pour tous vos petits travaux, il y a BRICOLI</h2>
                 <div class="row row-cols-lg-4 my-5">
-                    <?php
-                        for ($x = 0; $x < 4; $x++) {
-                            echo '
-                            <div class="col mb-3">
-                                <div class="card border-0">
-                                    <div class="card-body d-flex flex-column align-items-center gap-4">
-                                        <img src="./images/list.svg" class="card-img-top w-50" alt="...">
-                                        <h5 class="card-title">Card title</h5>
-                                    </div>
+                <?php
+                    $procedure = [
+                        [
+                            "text" => "Sélectionnez votre besoin parmi les catégories",
+                            "imgUrl" => "list.svg"
+                        ],
+                        [
+                            "text" => "Découvrez les profils des différents Bricoco de votre périmètre",
+                            "imgUrl" => "profiling.svg"
+                        ],
+                        [
+                            "text" => "Nous vous mettons en contact avec votre Bricoco préféré",
+                            "imgUrl" => "messaging.svg"
+                        ],
+                        [
+                            "text" => "Une fois le travail réalisé, vous payez le Bricoco directement, sans frais supplémentaires",
+                            "imgUrl" => "payment.png"
+                        ]
+                    ];
+
+                    foreach ($procedure as $item) {
+                        $text = $item['text'];
+                        $imgUrl = $item['imgUrl'];
+                        ?>
+                        <div class="col mb-3">
+                            <div class="card border-0 bg-transparent">
+                                <div class="card-body d-flex flex-column align-items-center gap-4">
+                                    <img src="./images/procedure/<?= $imgUrl ?>" class="card-img-top" alt="...">
+                                    <p class="card-title"><?= $text ?></p>
                                 </div>
                             </div>
-                            ';
-                        }
-                    ?>
+                        </div>
+                        <?php
+                    }
+                ?>
+
                 </div>
             </div>
         </section>
 
-        <section class="container-fluid">
+        <section class="container-fluid" id="bricoProcedure">
             <div class="container d-flex flex-column align-items-center py-5">
                 <h3>Devenez Bricoli</h3>
-                <h2 class="my-4">Passionné ou professionnel,</h2>
-                <h2 class="my-4">rejoignez le réseau Bricoco et arrondissez vos fins de mois</h2>
+                <h2 class="yellow-text my-4">Passionné ou professionnel,</h2>
+                <h2>rejoignez le réseau Bricoco et arrondissez vos fins de mois</h2>
                 <div class="row row-cols-lg-3 my-5">
-                    <?php
-                        for ($x = 0; $x < 3; $x++) {
-                            echo '
-                            <div class="col mb-3">
-                                <div class="card border-0">
-                                    <div class="card-body d-flex flex-column align-items-center gap-4">
-                                        <img src="./images/work-done.svg" class="card-img-top" alt="...">
-                                        <p class="card-title">Complétez votre profil bricoco en quelques clics, fixez un tarif à l’heure</p>
-                                    </div>
+                <?php
+                    $bricoProcedure = [
+                        [
+                            "text" => "Complétez votre profil bricoco en quelques clics, fixez un tarif à l’heure",
+                            "imgUrl" => "profil.png"
+                        ],
+                        [
+                            "text" => "Un particulier proche de chez vous vous contacte pour une mission",
+                            "imgUrl" => "messaging.svg"
+                        ],
+                        [
+                            "text" => "Une fois la tâche accomplie, vous êtes payé en direct !",
+                            "imgUrl" => "payement.svg"
+                        ],
+                    ];
+
+                    foreach ($bricoProcedure as $item) {
+                        $text = $item['text'];
+                        $imgUrl = $item['imgUrl'];
+                        ?>
+                        <div class="col mb-3">
+                            <div class="card border-0">
+                                <div class="card-body d-flex flex-column align-items-center gap-4">
+                                    <img src="./images/bricoprocedure/<?= $imgUrl ?>" class="card-img-top w-50" alt="...">
+                                    <p class="card-title"><?= $text ?></p>
                                 </div>
                             </div>
-                            ';
-                        }
-                    ?>
+                        </div>
+                        <?php
+                    }
+                ?>
+
                 </div>
                 <button class="btn btn-dark">Je m'inscrit</button>
             </div>
