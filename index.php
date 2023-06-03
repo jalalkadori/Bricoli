@@ -200,17 +200,17 @@
         </section>
 
         <section class="container-fluid" id="bricoProcedure">
-            <div class="container d-flex flex-column align-items-center py-5">
+            <div class="container d-flex flex-column align-items-center">
                 <h3>Devenez Bricoli</h3>
-                <h2 class="yellow-text my-4">Passionné ou professionnel,</h2>
-                <h2>rejoignez le réseau Bricoco et arrondissez vos fins de mois</h2>
+                <h2 class="text-warning fs-1 fw-bold my-4">Passionné ou professionnel,</h2>
+                <h2>rejoignez le réseau Bricoli et arrondissez vos fins de mois</h2>
                 <div class="row row-cols-lg-3 my-5">
                 <?php
                     $bricoProcedure = [
                         [
-                            "text" => "Complétez votre profil bricoco en quelques clics, fixez un tarif à l’heure",
-                            "imgUrl" => "profil.png"
-                        ],
+                            "text" => "Complétez votre profil bricoli en quelques clics, fixez un tarif à l’heure",
+                            "imgUrl" => "profil.svg"
+                        ],  
                         [
                             "text" => "Un particulier proche de chez vous vous contacte pour une mission",
                             "imgUrl" => "messaging.svg"

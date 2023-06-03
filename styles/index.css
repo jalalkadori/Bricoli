@@ -12,11 +12,22 @@ h2{
   font-size: 2.5rem;
   font-weight: 300;
 }
-.yellow-text{
+#bricoProcedure .yellow-text{
   color : #FFCB09;
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight: 400;
 }
+/* navbar styling start*/
+.navbar ul li a {
+  font-size: 1rem;
+  font-weight: 300;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+.navbar ul li a:hover {
+  color: #FFCB09;
+}
+/* navbar styling end */
 
 /* slide section */
 #slide {
@@ -47,6 +58,7 @@ h2{
   cursor: pointer;
   transition: all 0.3s ease-in-out; 
 }
+
 /* slide section styling end */
 
 
@@ -78,6 +90,7 @@ h2{
   transform: translate(-50%, -50%);
 }
 .overlay button{
+  border: none;
   border-radius: 25px;
   padding: 5px 25px;
   font-size: 1rem;
@@ -90,11 +103,18 @@ h2{
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s, box-shadow 0.3s;
 }
-
-
 /* services section styling end */
 
-/* procedures section styling end */
+/* bricoProcedures section styling end */
+#bricoProcedure button {
+  border: none;
+  border-radius: 25px;
+  padding: 5px 25px;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; 
+}
 
 /* procedures section styling end */
 
