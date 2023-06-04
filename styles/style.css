@@ -2,7 +2,7 @@
 * {
   box-sizing: border-box;
   font-family: 'Rubik', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
 }
 h3{
   font-size: 2rem;
@@ -20,7 +20,7 @@ h2{
 /* navbar styling start*/
 .navbar ul li a {
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 400;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 }
@@ -69,6 +69,27 @@ h2{
 }
 /* bricoleurDuMoi section styling end */
 
+/* blog section styling end */
+.image-heading {
+  display: flex;
+  align-items: center;
+}
+.svg-image {
+
+  margin-left: -10px; 
+}
+#blog a {
+  text-decoration: none;
+  color: #000;
+}
+#blog a:hover {
+  color: #FFCB09;
+  cursor: pointer;
+}
+
+
+/* blog section styling end */
+
 /* services section styling start  */
 
 #services h3{
@@ -110,7 +131,7 @@ h2{
   border: none;
   border-radius: 25px;
   padding: 5px 25px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 400;
   cursor: pointer;
   transition: all 0.3s ease-in-out; 

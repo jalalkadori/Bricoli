@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bricoli</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/style.css">
     <script src="https://kit.fontawesome.com/75c6b1327b.js" crossorigin="anonymous"></script>
 </head>
   <body>
@@ -44,7 +44,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Devenir Bricoleur</a>
+                            <a class="nav-link" href="./bricoleur/signup.php">Devenir Bricoleur</a>
                         </li>
                     </ul>
                     
@@ -203,7 +203,7 @@
             <div class="container d-flex flex-column align-items-center">
                 <h3>Devenez Bricoli</h3>
                 <h2 class="text-warning fs-1 fw-bold my-4">Passionné ou professionnel,</h2>
-                <h2>rejoignez le réseau Bricoli et arrondissez vos fins de mois</h2>
+                <h2>rejoignez le réseau <span class="text-warning fw-bold fs-1">Bricoli</span>  et arrondissez vos fins de mois</h2>
                 <div class="row row-cols-lg-3 my-5">
                 <?php
                     $bricoProcedure = [
@@ -244,30 +244,53 @@
 
         <section class="container-fluid py-5" id="blog">
             <div class="container">
-                <h2>Brico Blog</h2>
-                <div class="row row-cols-lg-2">
-                    <div class="col border ">
-                        <div class="">
-                            <div class="card">
-                                <img src="./images/peinture.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col border ">
-                        <div class="">
-                            <div class="card">
-                                <img src="./images/peinture.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                <div class="image-heading">
+                    <h2 class="fs-1 fw-bold">BRICO</h2>
+                    <img src="./images/blog/blog.png" alt="Description of the image" width="100" height="" class="svg-image">
                 </div>
-                <p class="text-end">Voir tous les articles</p>
+
+                <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./images/slide.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>First slide label</h5>
+                                <p>Some representative placeholder content for the first slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/slide.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>Some representative placeholder content for the second slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/slide.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                                <p>Some representative placeholder content for the third slide.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="text-end my-2">
+                    <a class="text-end  fs-6">Voir tous les articles <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
             </div>
         </section>
 
@@ -276,7 +299,9 @@
 
     <footer class="container-fluid bg-dark py-5">
         <div class="container">
-            <h2 class="text-warning">BRICOLI</h2>
+                <a class="navbar-brand" href="./index.php">
+                    <img src="./logo/BRICO-WHITE.png" alt="bricoli logo" srcset="bricoli logo" width="200">
+                </a>
             <h5 class="text-warning py-3">Trouver un Bricoleur à :</h5>
                 <div class="row row-cols-lg-3">
                     <div class="col">
@@ -302,7 +327,7 @@
                         <p class="text-light">CGU & CGV</p>
                     </div>
                     <div class="col">
-                        <h5 class="text-warning py-3">Utiliser Bricoco</h5>
+                        <h5 class="text-warning py-3">Utiliser Bricoli</h5>
                         <p class="text-light">Devenir Bricocoleur</p>
                         <p class="text-light">Travaux entre particuliers</p>
                     </div>
