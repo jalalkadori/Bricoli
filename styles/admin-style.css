@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap');
+* {
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+}
+body {
+  min-width: 450px;
+}
+#login input {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius:  5px;
+}
+.articleIcon {
+  font-size: 4em;
+  color: #00DFA2;
+}
+.articleIcon {
+  font-size: 4em;
+  color: #00DFA2;
+}
+.articleIcon {
+  font-size: 4em;
+  color: #00DFA2;
+}
+.articleIcon {
+  font-size: 4em;
+  color: #00DFA2;
+}
+.material-symbols-outlined {
+  color: #00DFA2;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 500,
+  'GRAD' 200,
+  'opsz' 48
+}
