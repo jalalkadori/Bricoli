@@ -18,7 +18,7 @@
         <nav class="navbar navbar-expand-lg bg-body-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./index.php">
-                    <img src="./logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="200">
+                    <img src="./logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="150">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -250,13 +250,13 @@
                     <img src="./images/blog/blog.png" alt="Description of the image" width="100" height="" class="svg-image">
                 </div>
 
-                <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+                <div id="carousel" class="carousel slide rounded" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
-                    <div class="carousel-inner">
+                    <div class="carousel-inner rounded">
                         <div class="carousel-item active">
                             <img src="./images/slide.jpg" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
