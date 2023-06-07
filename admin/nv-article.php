@@ -1,6 +1,7 @@
 <?php 
     include("../db_connection.php");
     include("session-config.php");
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -66,53 +67,67 @@
             </div>
         </nav>
 
-        <section class="container my-3" id="blogGallery">
-            <div class="d-flex justify-content-between mb-3">
-                <div class="image-heading">
-                    <h2 class="fs-1 fw-bold">BRICO</h2>
-                    <img src="../images/blog/blog.png" alt="Description of the image" width="100" height="" class="svg-image">
-                </div>
-                <a type="button" class="btn text-dark" href="./nv-article.php">+ Ajouter un article</a>
-            </div>
-            <div class="row row-cols-lg-2 text-center">
-            <?php
-                // Assuming you have a database connection established
+        <?php
+            $idAdmin = $_SESSION['AdminID'];
+            $error = "";
 
-                // Fetch articles from the database
-                $stmt = $db_connection->prepare("SELECT * FROM article");
-                $stmt->execute();
-                $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // Check if the form is submitted
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Retrieve form data
+                $titre = $_POST['titre'];
+                $categorie = $_POST['categorie'];
+                $articleImg = $_FILES['article-img']['name'];
+                $articleImgTmp = $_FILES['article-img']['tmp_name']; // Temporary location of the uploaded file
+                $articleContenu = $_POST['article-contenu'];
 
-                // Display articles
-                foreach ($articles as $article) {
-                    $imgUrl = $article['img_url'];
-                    $category = $article['categorie_acticle'];
-                    $title = $article['titre_article'];
-                    $updatedAt = $article['date_publication'];
+                // Define the target folder for image uploads
+                $targetFolder = "../images/blog/articles/"; // Specify the desired folder path
 
-                    // HTML code for displaying the article
-                    echo '<div class="col mb-2">';
-                    echo '    <div class="card border-0 text-white">';
-                    echo '        <img class="card-img img-fluid" src="' . $imgUrl . '" alt="Article image">';
-                    echo '        <div class="card-img-overlay d-flex flex-column justify-content-end align-items-end p-0">';
-                    echo '            <div class="text-end w-100">';
-                    echo '                <span class="btn btn-warning rounded-0">' . $category . '</span>';
-                    echo '            </div>';
-                    echo '            <div class="text-start w-100 px-2 py-1 bg-dark" style="--bs-bg-opacity: .5;">';
-                    echo '                <h5 class="card-title">' . $title . '</h5>';
-                    echo '                <div class="d-flex justify-content-between">';
-                    echo '                    <small class="text-white p-0">Last updated ' . $updatedAt . '</small>';
-                    echo '                    <a class="text-warning"> > Lire la suite </a>';
-                    echo '                </div>';
-                    echo '            </div>';
-                    echo '        </div>';
-                    echo '    </div>';
-                    echo '</div>';
+                // Generate a unique filename for the uploaded image
+                $targetFilePath = $targetFolder . uniqid() . '_' . $articleImg;
+
+                // Move the uploaded file to the target folder
+                if (move_uploaded_file($articleImgTmp, $targetFilePath)) {
+                    // File upload successful, proceed with database insertion
+
+                    // Insert the form data into the "article" table
+                    $stmt = $db_connection->prepare("INSERT INTO article (id_Article, titre_article, corp_article, categorie_acticle, img_url, date_publication, id_admin) VALUES (NULL, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?)");
+                    $stmt->execute([$titre, $articleContenu, $categorie, $targetFilePath, $idAdmin]);
+                    // Redirect to a success page or do any other necessary actions
+                    header("Location: blog.php");
+                    exit();
+                } else {
+                    // File upload failed
+                    $error = "Error uploading the image file.";
                 }
-            ?>
+            }
+        ?>
 
-            </div>
+        <section class="container my-4">
+            <h4 class="mb-4">Ajouter un nouveau article</h4>
+            <form action="#" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="titre" class="form-label">Titre d'article:</label>
+                    <input type="text" class="form-control rounded-0 border border-dark" id="titre" name="titre">
+                </div>
+                <div class="mb-3">
+                    <label for="categorie" class="form-label">Categorie d'article:</label>
+                    <input type="text" class="form-control rounded-0 border border-dark" id="categorie" name="categorie">
+                </div>
+                <div class="mb-3">
+                    <label for="article-img" class="form-label">Image d'article:</label>
+                    <input type="file" class="form-control rounded-0 border border-dark" id="article-img" name="article-img">
+                    <div class="text-danger"><?php echo $error ?></div>
+                </div>
+                <div class="mb-3">
+                    <label for="article-contenu" class="form-label">Contenu d'article:</label>
+                    <textarea class="form-control rounded-0 border border-dark" id="article-contenu" rows="3" name="article-contenu"></textarea>
+                </div>
+                <button type="submit" class="btn btn-dark rounded-0 w-100">Submit</button>
+            </form>
         </section>
+
+
         
 
     </main>

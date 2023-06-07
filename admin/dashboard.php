@@ -53,7 +53,7 @@
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Articles de blog</a>
+                            <a class="nav-link" href="./blog.php">Articles de blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Inscription des bricoleurs</a>
@@ -69,35 +69,33 @@
         <section class="container my-5">
             <div class="row row-cols-lg-2">
                 <div class="col-12 my-2">
-                    <a href="blog.php">
-                        <div class="card py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-2 text-center">
-                                        <i class="fa-solid fa-newspaper articleIcon"></i>
-                                    </div>
-                                    <div class="col-6 text-start">
-                                        <h5 class="fs-1">Articles</h5>
-                                        <h6>Nombre total d'articles publiés</h6>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <h2 class="fs-1">124</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-12 my-2">
-                    <div class="card py-2">
+                    <div class="card py-2 h-100">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-2 text-center">
                                     <i class="fa-solid fa-newspaper articleIcon"></i>
                                 </div>
                                 <div class="col-6 text-start">
-                                    <h5 class="fs-1">Bricoleurs</h5>
+                                    <h5 class="fs-2">Articles</h5>
+                                    <h6>Nombre total d'articles publiés</h6>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <h2 class="fs-1">124</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 my-2">
+                    <div class="card py-2">
+                        <div class="card-body h-100">
+                            <div class="row align-items-center">
+                                <div class="col-2 text-center">
+                                    <i class="fa-solid fa-newspaper articleIcon"></i>
+                                </div>
+                                <div class="col-6 text-start">
+                                    <h5 class="fs-2">Bricoleurs</h5>
                                     <h6>Bricoleurs inscrits</h6>
                                 </div>
                                 <div class="col-4 text-end">
@@ -109,14 +107,14 @@
                     </div>
                 </div>
                 <div class="col-12 my-2">
-                    <div class="card py-2">
+                    <div class="card py-2 h-100">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-2 text-center">
                                     <i class="fa-solid fa-newspaper articleIcon"></i>
                                 </div>
                                 <div class="col-6 text-start">
-                                    <h5 class="fs-1">Inscriptions</h5>
+                                    <h5 class="fs-2">Inscriptions</h5>
                                     <h6>Inscriptions en attente de validation</h6>
                                 </div>
                                 <div class="col-4 text-end">
@@ -128,14 +126,14 @@
                 </div>
                 <div class="col-12 my-2">
                     <div class="card py-2">
-                        <div class="card-body">
+                        <div class="card-body h-100">
                             <div class="row align-items-center">
                                 <div class="col-2 text-center">
                                     <i class="fa-solid fa-newspaper articleIcon"></i>
                                 </div>
                                 <div class="col-6 text-start">
-                                    <h5 class="fs-1">Réclamations</h5>
-                                    <h6>Demandes et réclamations</h6>
+                                    <h5 class="fs-2">Réclamations</h5>
+                                    <h6>Demandes et réclamations à traiter</h6>
                                 </div>
                                 <div class="col-4 text-end">
                                     <h2 class="fs-1">124</h2>

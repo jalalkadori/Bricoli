@@ -68,6 +68,7 @@
                         //store any necessary user data
                         $_SESSION['adminEmail'] = $email;
                         $_SESSION['AdminNom'] = $row['nom_admin'];
+                        $_SESSION['AdminID'] = $row['id_admin'];
                         // Redirect the user to the dashboard page
                         header("Location: dashboard.php");
                         exit();
