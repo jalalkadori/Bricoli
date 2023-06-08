@@ -68,6 +68,16 @@
 
         <section class="container my-5">
             <div class="row row-cols-lg-2">
+                <?php
+                    // Prepare the SQL statement to count the number of articles
+                    $stmt = $db_connection->prepare("SELECT COUNT(*) AS articleCount FROM article");
+                    // Execute the query
+                    $stmt->execute();
+                    // Fetch the result
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    // Get the article count from the result
+                    $articleCount = $result['articleCount'];       
+                ?>
                 <div class="col-12 my-2">
                     <div class="card py-2 h-100">
                         <div class="card-body">
@@ -79,8 +89,9 @@
                                     <h5 class="fs-2">Articles</h5>
                                     <h6>Nombre total d'articles publiés</h6>
                                 </div>
-                                <div class="col-4 text-end">
-                                    <h2 class="fs-1">124</h2>
+                                <div class="col-4 d-flex justify-content-end align-items-center">
+                                    <h2 class="fs-1"><?php echo $articleCount;?> <i class="fa-solid fa-arrow-trend-up"></i></h2>
+                                    
                                 </div>
                             </div>
                         </div>
