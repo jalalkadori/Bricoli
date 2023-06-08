@@ -68,9 +68,30 @@
         </nav>
 
         <?php
-            // Assuming you have a PDO database connection established
+
             $idAdmin = $_SESSION['AdminID'];
             $error = "";
+            // Get the article ID from the URL parameter
+            $articleId = $_GET['id'];
+
+            // Prepare the SELECT statement to fetch the article data
+            $stmt = $db_connection->prepare("SELECT * FROM article WHERE id_Article = :articleId");
+            $stmt->bindParam(':articleId', $articleId);
+            $stmt->execute();
+            $article = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Check if the article exists
+            if (!$article) {
+                // Handle the case when the article doesn't exist
+                echo "Article not found";
+                exit;
+            }
+
+            // Retrieve the article data
+            $titre = $article['titre_article'];
+            $categorie = $article['categorie_acticle'];
+            $articleImg = $article['img_url'];
+            $articleContenu = $article['corp_article'];
 
             // Function to sanitize and validate input data
             function sanitizeInput($input) {
@@ -84,64 +105,70 @@
                 // Retrieve form data and sanitize inputs
                 $titre = sanitizeInput($_POST['titre']);
                 $categorie = sanitizeInput($_POST['categorie']);
-                $articleImg = $_FILES['article-img']['name'];
-                $articleImgTmp = $_FILES['article-img']['tmp_name'];
                 $articleContenu = sanitizeInput($_POST['article-contenu']);
 
-                // Define the target folder for image uploads
-                $targetFolder = "../images/blog/articles/"; // Specify the desired folder path
+                // Check if a new image is uploaded
+                if (!empty($_FILES['article-img']['name'])) {
+                    $articleImg = $_FILES['article-img']['name'];
+                    $articleImgTmp = $_FILES['article-img']['tmp_name'];
 
-                // Generate a unique filename for the uploaded image
-                $targetFilePath = $targetFolder . uniqid() . '_' . $articleImg;
+                    // Define the target folder for image uploads
+                    $targetFolder = "../images/blog/articles/"; // Specify the desired folder path
 
-                // Move the uploaded file to the target folder
-                if (move_uploaded_file($articleImgTmp, $targetFilePath)) {
-                    // File upload successful, proceed with database insertion
-                    // Prepare the INSERT statement
-                    // Use parameter binding to prevent SQL injections
-                    $stmt = $db_connection->prepare("INSERT INTO article (id_Article, titre_article, corp_article, categorie_acticle, img_url, date_publication, id_admin) VALUES (NULL, :titre, :articleContenu, :categorie, :targetFilePath, CURRENT_TIMESTAMP, :idAdmin)");
-                    $stmt->bindParam(':titre', $titre);
-                    $stmt->bindParam(':articleContenu', $articleContenu);
-                    $stmt->bindParam(':categorie', $categorie);
-                    $stmt->bindParam(':targetFilePath', $targetFilePath);
-                    $stmt->bindParam(':idAdmin', $idAdmin);
-                    
-                    // Execute the prepared statement
-                    $stmt->execute();
+                    // Generate a unique filename for the uploaded image using timestamp
+                    $timestamp = time();
+                    $fileExtension = pathinfo($_FILES['article-img']['name'], PATHINFO_EXTENSION);
+                    $targetFilePath = $targetFolder . $timestamp . '.' . $fileExtension;
 
-                    // Redirect to a success page or do any other necessary actions
-                    header("Location: blog.php");
-                    exit();
-                } else {
-                    // File upload failed
-                    $error = "Error uploading the image file.";
+                    // Move the uploaded file to the target folder
+                    if (move_uploaded_file($articleImgTmp, $targetFilePath)) {
+                        // Delete the old image file
+                        if (file_exists($article['img_url'])) {
+                            unlink($article['img_url']);
+                        }
+
+                        // Update the article in the database
+                        $stmt = $db_connection->prepare("UPDATE article SET titre_article = :titre, corp_article = :articleContenu, categorie_acticle = :categorie, img_url = :targetFilePath WHERE id_Article = :articleId");
+                        $stmt->bindParam(':titre', $titre);
+                        $stmt->bindParam(':articleContenu', $articleContenu);
+                        $stmt->bindParam(':categorie', $categorie);
+                        $stmt->bindParam(':targetFilePath', $targetFilePath);
+                        $stmt->bindParam(':articleId', $articleId);
+                        $stmt->execute();
+
+                        // Redirect to the article details page
+                        header("Location: articles?id=" . $articleId);
+                        exit();
+                    } else {
+                        // File upload failed
+                        $error = "Error uploading the image file.";
+                    }
                 }
             }
         ?>
 
 
+        <!-- HTML code for the edit-article page -->
         <section class="container my-4">
-            <h4 class="mb-4">Ajouter un nouveau article</h4>
-            <form action="#" method="post" enctype="multipart/form-data">
+            <h4 class="mb-4">Edit Article</h4>
+            <form action="#" method="post">
                 <div class="mb-3">
-                    <label for="titre" class="form-label">Titre d'article:</label>
-                    <input type="text" class="form-control rounded-0 border border-dark" id="titre" name="titre" required>
+                    <label for="titre" class="form-label">Titre d'article : </label>
+                    <input type="text" class="form-control rounded-0 border border-dark" id="titre" name="titre" value="<?php echo $titre; ?>">
                 </div>
                 <div class="mb-3">
-                    <label for="categorie" class="form-label">Categorie d'article:</label>
-                    <input type="text" class="form-control rounded-0 border border-dark" id="categorie" name="categorie" required>
+                    <label for="categorie" class="form-label">Categorie d'article :</label>
+                    <input type="text" class="form-control rounded-0 border border-dark" id="categorie" name="categorie" value="<?php echo $categorie; ?>">
                 </div>
                 <div class="mb-3">
-                    <label for="article-img" class="form-label">Image d'article:</label>
-                    <input type="file" class="form-control rounded-0 border border-dark" id="article-img" name="article-img" required accept="image/*">
-                    <div class="text-danger">Veuillez noter que la taille maximale des fichiers autorisée est de 2 Mo.</div>
-                    <div class="text-danger"><?php echo $error ?></div>
+                    <label for="article-img" class="form-label">Image d'article :</label>
+                    <input type="file" class="form-control rounded-0 border border-dark" id="article-img" name="article-img">
                 </div>
                 <div class="mb-3">
-                    <label for="article-contenu" class="form-label">Contenu d'article:</label>
-                    <textarea class="form-control rounded-0 border border-dark" id="article-contenu" rows="3" name="article-contenu"></textarea>
+                    <label for="article-contenu" class="form-label">Contenu d'article :</label>
+                    <textarea class="form-control rounded-0 border border-dark" id="article-contenu" rows="3" name="article-contenu"><?php echo $articleContenu; ?></textarea>
                 </div>
-                <button type="submit" class="btn btn-dark rounded-0 w-100">Submit</button>
+                <button type="submit" class="btn btn-dark rounded-0 w-100">Save Changes</button>
             </form>
         </section>
 

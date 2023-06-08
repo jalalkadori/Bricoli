@@ -28,11 +28,4 @@ body {
   font-size: 4em;
   color: #00DFA2;
 }
-.material-symbols-outlined {
-  color: #00DFA2;
-  font-variation-settings:
-  'FILL' 1,
-  'wght' 500,
-  'GRAD' 200,
-  'opsz' 48
-}
+

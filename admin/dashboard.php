@@ -18,7 +18,7 @@
     <header class="container-fluid">
         <nav class="navbar navbar-expand-lg bg-body-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./dashboard.php">
+                <a class="navbar-brand" href="./dashboard">
                     <img src="../logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="150">
                 </a>
 
@@ -31,7 +31,7 @@
                                 <i class="fa-sharp fa-solid fa-user fa-sm ml-2"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="logout.php">Déconnexion</a></li>
+                                <li><a class="dropdown-item" href="logout">Déconnexion</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -53,7 +53,7 @@
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="./blog.php">Articles de blog</a>
+                            <a class="nav-link" href="./blog">Articles de blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Inscription des bricoleurs</a>
@@ -142,8 +142,6 @@
                         </div>
                     </div>
                 </div>
-
-                
             </div>
         </section>
 

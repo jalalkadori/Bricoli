@@ -1,6 +1,8 @@
 <?php 
     include("../db_connection.php");
     include("session-config.php");
+    // Retrieve the article ID from the URL
+    $articleId = $_GET['id'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -66,55 +68,69 @@
             </div>
         </nav>
 
-        <section class="container my-3" id="blogGallery">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <div class="image-heading">
-                    <h2 class="fs-1 fw-bold">BRICO</h2>
-                    <img src="../images/blog/blog.png" alt="Description of the image" width="100" height="" class="svg-image">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-center mt-5">Détails de l'article</h1>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <a href="blog" class="btn btn-outline-dark"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+                            <div>
+                                <a href="edit-article?id=<?php echo $articleId; ?>" class="btn"><i class="fa-solid fa-pen-to-square"></i> Modifier</a>
+                                <a href="delete-article?id=<?php echo $articleId; ?>" class="btn"><i class="fa-solid fa-trash"></i> Supprimer</a>
+                            </div>
+
+                        </div>
+                        <?php
+                            
+                            // Check if the article ID is present in the URL
+                            if (isset($_GET['id'])) {
+                                
+
+                                // Prepare the SELECT statement to fetch the article data
+                                $stmt = $db_connection->prepare("SELECT * FROM article WHERE id_Article = :articleId");
+                                $stmt->bindParam(':articleId', $articleId);
+                                $stmt->execute();
+
+                                // Fetch the article data
+                                $article = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                                // Check if the article exists
+                                if ($article) {
+                                    $imgUrl = $article['img_url'];
+                                    $category = $article['categorie_acticle'];
+                                    $title = $article['titre_article'];
+                                    $updatedAt = date("d F Y", strtotime($article['date_publication'])); // Format the date as "day month year"
+                                    $articleContent = $article['corp_article'];
+
+                                    // HTML code for displaying the article details
+                                    echo '<div class="card">';
+                                    echo '    <img src="' . $imgUrl . '" class="card-img-top" alt="Article image">';
+                                    echo '    <div class="card-body">';
+                                    echo '        <h5 class="card-title">' . $title . '</h5>';
+                                    echo '        <p class="card-text">' . $articleContent . '</p>';
+                                    echo '        <p class="card-text">Dernière mise à jour : ' . $updatedAt . '</p>';
+                                    echo '        <a href="blog" class="btn btn-primary">Retour</a>';
+                                    echo '    </div>';
+                                    echo '</div>';
+                                } else {
+                                    // Article not found
+                                    echo '<p>Aucun article trouvé.</p>';
+                                }
+                            } else {
+                                // No article ID in the URL
+                                echo '<p>Aucun identifiant d\'article spécifié.</p>';
+                            }
+                        ?>
+                    </div>
                 </div>
-                <a type="button" class="btn text-dark" href="./nv-article">+ Ajouter un article</a>
-            </div>
-            <div class="row row-cols-1 row-cols-xl-2 text-center">
-            <?php
-                // Fetch articles from the database
-                $stmt = $db_connection->prepare("SELECT * FROM article");
-                $stmt->execute();
-                $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                // Display articles
-                foreach ($articles as $article) {
-                    $imgUrl = $article['img_url'];
-                    $category = $article['categorie_acticle'];
-                    $title = $article['titre_article'];
-                    $updatedAt = date("d F Y", strtotime($article['date_publication'])); // Format the date as "day month year"
-                    $articleId = $article['id_Article'];
-                    $encodedTitle = urlencode($title); // URL encode the article title
-
-                    // HTML code for displaying the article
-                    echo '<div class="col mb-2">';
-                    echo '        <div class="card border-0 text-white">';
-                    echo '            <img class="card-img img-fluid" src="' . $imgUrl . '" alt="Article image">';
-                    echo '            <div class="card-img-overlay d-flex flex-column justify-content-end align-items-end p-0">';
-                    echo '                <div class="text-end w-100">';
-                    echo '                    <span class="btn btn-warning rounded-0">' . $category . '</span>';
-                    echo '                </div>';
-                    echo '                <div class="text-start w-100 px-2 py-1 bg-dark" style="--bs-bg-opacity: .5;">';
-                    echo '                    <h5 class="card-title">' . $title . '</h5>';
-                    echo '                    <div class="d-flex justify-content-between align-items-center">';
-                    echo '                        <small class="text-white p-0">Dernière mise à jour ' . $updatedAt . '</small>';
-                    echo '                        <a href="articles?id=' . $articleId . '&title=' . urlencode($title) . '" class="btn text-warning border-0" >Lire la suite ></a>';
-                    echo '                    </div>';
-                    echo '                </div>';
-                    echo '            </div>';
-                    echo '        </div>';
-                    echo '</div>';
-                }
-            ?>
-
-
             </div>
         </section>
+
         
+
+
+       
 
     </main>
     
