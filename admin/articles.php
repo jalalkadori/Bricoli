@@ -77,7 +77,7 @@
                             <a href="blog" class="btn btn-outline-dark"><i class="fa-solid fa-arrow-left"></i> Retour</a>
                             <div>
                                 <a href="edit-article?id=<?php echo $articleId; ?>" class="btn"><i class="fa-solid fa-pen-to-square"></i> Modifier</a>
-                                <a href="delete-article?id=<?php echo $articleId; ?>" class="btn"><i class="fa-solid fa-trash"></i> Supprimer</a>
+                                <a class="btn" data-bs-toggle="modal" data-bs-target="#deletModal"><i class="fa-solid fa-trash"></i> Supprimer</a>
                             </div>
 
                         </div>
@@ -110,7 +110,7 @@
                                     echo '        <h5 class="card-title">' . $title . '</h5>';
                                     echo '        <p class="card-text">' . $articleContent . '</p>';
                                     echo '        <p class="card-text">Dernière mise à jour : ' . $updatedAt . '</p>';
-                                    echo '        <a href="blog" class="btn btn-primary">Retour</a>';
+                                    echo '        <a href="blog" class="btn btn-outline-dark"><i class="fa-solid fa-arrow-left"></i> Retour</a>';
                                     echo '    </div>';
                                     echo '</div>';
                                 } else {
@@ -122,6 +122,25 @@
                                 echo '<p>Aucun identifiant d\'article spécifié.</p>';
                             }
                         ?>
+                    </div>
+                </div>
+
+                <!-- deleting article Modal window -->
+                <div class="modal fade" id="deletModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Êtes-vous sûr de vouloir supprimer cet article ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <a href="delete-article?id=<?php echo $articleId; ?>" type="button" class="btn btn-danger">Supprimer</a>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>

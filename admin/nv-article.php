@@ -68,7 +68,6 @@
         </nav>
 
         <?php
-            // Assuming you have a PDO database connection established
             $idAdmin = $_SESSION['AdminID'];
             $error = "";
 
@@ -105,7 +104,7 @@
                     $stmt->bindParam(':categorie', $categorie);
                     $stmt->bindParam(':targetFilePath', $targetFilePath);
                     $stmt->bindParam(':idAdmin', $idAdmin);
-                    
+
                     // Execute the prepared statement
                     $stmt->execute();
 
@@ -117,28 +116,35 @@
                     $error = "Error uploading the image file.";
                 }
             }
-        ?>
-
+            ?>
 
         <section class="container my-4">
-            <h4 class="mb-4">Ajouter un nouveau article</h4>
+            <h4 class="mb-4">Ajouter un nouvel article</h4>
             <form action="#" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="titre" class="form-label">Titre d'article:</label>
+                    <label for="titre" class="form-label">Titre de l'article:</label>
                     <input type="text" class="form-control rounded-0 border border-dark" id="titre" name="titre" required>
                 </div>
                 <div class="mb-3">
-                    <label for="categorie" class="form-label">Categorie d'article:</label>
-                    <input type="text" class="form-control rounded-0 border border-dark" id="categorie" name="categorie" required>
+                    <label for="categorie" class="form-label">Catégorie de l'article:</label>
+                    
+                    <select name="categorie" id="categorie" class="form-select rounded-0 border border-dark" required>
+                        <option selected>Choisire une categorie</option>
+                        <!-- select option are filled from a json file using javascript -->
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="article-img" class="form-label">Image d'article:</label>
+                    <label for="article-img" class="form-label">Image de l'article:</label>
                     <input type="file" class="form-control rounded-0 border border-dark" id="article-img" name="article-img" required accept="image/*">
                     <div class="text-danger">Veuillez noter que la taille maximale des fichiers autorisée est de 2 Mo.</div>
-                    <div class="text-danger"><?php echo $error ?></div>
+                    <?php if (!empty($error)) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $error; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
-                    <label for="article-contenu" class="form-label">Contenu d'article:</label>
+                    <label for="article-contenu" class="form-label">Contenu de l'article:</label>
                     <textarea class="form-control rounded-0 border border-dark" id="article-contenu" rows="3" name="article-contenu"></textarea>
                 </div>
                 <button type="submit" class="btn btn-dark rounded-0 w-100">Submit</button>
@@ -146,10 +152,12 @@
         </section>
 
 
+
         
 
     </main>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>

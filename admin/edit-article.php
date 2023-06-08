@@ -80,18 +80,10 @@
             $stmt->execute();
             $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Check if the article exists
-            if (!$article) {
-                // Handle the case when the article doesn't exist
-                echo "Article not found";
-                exit;
-            }
-
             // Retrieve the article data
-            $titre = $article['titre_article'];
-            $categorie = $article['categorie_acticle'];
-            $articleImg = $article['img_url'];
-            $articleContenu = $article['corp_article'];
+            $titreOld = $article['titre_article'];
+            $categorieOld = $article['categorie_acticle'];
+            $articleOldContenu = $article['corp_article'];
 
             // Function to sanitize and validate input data
             function sanitizeInput($input) {
@@ -99,8 +91,11 @@
                 $input = trim($input);
                 return $input;
             }
+            // Fetch the categories from the JSON file
+            $categoriesData = file_get_contents('../json/category.json');
+            $categories = json_decode($categoriesData, true);
 
-            // Check if the form is submitted
+           // Check if the form is submitted
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Retrieve form data and sanitize inputs
                 $titre = sanitizeInput($_POST['titre']);
@@ -115,10 +110,8 @@
                     // Define the target folder for image uploads
                     $targetFolder = "../images/blog/articles/"; // Specify the desired folder path
 
-                    // Generate a unique filename for the uploaded image using timestamp
-                    $timestamp = time();
-                    $fileExtension = pathinfo($_FILES['article-img']['name'], PATHINFO_EXTENSION);
-                    $targetFilePath = $targetFolder . $timestamp . '.' . $fileExtension;
+                    // Generate a unique filename for the uploaded image
+                    $targetFilePath = $targetFolder . uniqid() . '_' . $articleImg;
 
                     // Move the uploaded file to the target folder
                     if (move_uploaded_file($articleImgTmp, $targetFilePath)) {
@@ -143,30 +136,54 @@
                         // File upload failed
                         $error = "Error uploading the image file.";
                     }
+                } else {
+                    // File input field is empty
+                    // Update the article in the database without changing the image
+                    $stmt = $db_connection->prepare("UPDATE article SET titre_article = :titre, corp_article = :articleContenu, categorie_acticle = :categorie WHERE id_Article = :articleId");
+                    $stmt->bindParam(':titre', $titre);
+                    $stmt->bindParam(':articleContenu', $articleContenu);
+                    $stmt->bindParam(':categorie', $categorie);
+                    $stmt->bindParam(':articleId', $articleId);
+                    $stmt->execute();
+
+                    // Redirect to the article details page
+                    header("Location: articles?id=" . $articleId);
+                    exit();
                 }
             }
+
         ?>
 
 
         <!-- HTML code for the edit-article page -->
         <section class="container my-4">
-            <h4 class="mb-4">Edit Article</h4>
-            <form action="#" method="post">
+            <h4 class="mb-4">Modification d'article</h4>
+            <?php if (!empty($error)) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo $error; ?>
+                </div>
+            <?php endif; ?>
+            <form action="#" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="titre" class="form-label">Titre d'article : </label>
-                    <input type="text" class="form-control rounded-0 border border-dark" id="titre" name="titre" value="<?php echo $titre; ?>">
+                    <input type="text" class="form-control rounded-0 border border-dark" id="titre" name="titre" value="<?php echo $titreOld; ?>">
                 </div>
                 <div class="mb-3">
                     <label for="categorie" class="form-label">Categorie d'article :</label>
-                    <input type="text" class="form-control rounded-0 border border-dark" id="categorie" name="categorie" value="<?php echo $categorie; ?>">
+                    <select name="categorie" id="categorie" class="form-select rounded-0 border border-dark" required>
+                        <option selected>Choisire une categorie</option>
+                        <?php foreach ($categories as $category) : ?>
+                            <option value="<?php echo $category['category']; ?>" <?php echo ($category['category'] == $categorieOld) ? 'selected' : ''; ?>><?php echo $category['category']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="article-img" class="form-label">Image d'article :</label>
-                    <input type="file" class="form-control rounded-0 border border-dark" id="article-img" name="article-img">
+                    <input type="file" class="form-control rounded-0 border border-dark" name="article-img">
                 </div>
                 <div class="mb-3">
                     <label for="article-contenu" class="form-label">Contenu d'article :</label>
-                    <textarea class="form-control rounded-0 border border-dark" id="article-contenu" rows="3" name="article-contenu"><?php echo $articleContenu; ?></textarea>
+                    <textarea class="form-control rounded-0 border border-dark" id="article-contenu" rows="3" name="article-contenu"><?php echo $articleOldContenu; ?></textarea>
                 </div>
                 <button type="submit" class="btn btn-dark rounded-0 w-100">Save Changes</button>
             </form>

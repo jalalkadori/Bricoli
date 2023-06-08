@@ -28,4 +28,10 @@ body {
   font-size: 4em;
   color: #00DFA2;
 }
+.modal {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  margin: 0;
+}
 

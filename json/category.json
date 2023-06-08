@@ -1,0 +1,32 @@
+[
+	{
+		"img": "peinture.jpg",
+		"color": "btn-primary",
+		"category": "Peinture"
+	},
+	{
+		"img": "Plomberie.jpg",
+		"color": "btn-secondary",
+		"category": "Plomberie"
+	},
+	{
+		"img": "Electricit\u00e9.jpg",
+		"color": "btn-danger",
+		"category": "Electricit\u00e9"
+	},
+	{
+		"img": "Carrelage.jpg",
+		"color": "btn-success",
+		"category": "Carrelage"
+	},
+	{
+		"img": "Electrom\u00e9nager.jpg",
+		"color": "btn-warning",
+		"category": "Electrom\u00e9nager"
+	},
+	{
+		"img": "Montage de meubles.jpg",
+		"color": "btn-dark",
+		"category": "Motage de meubles"
+	}
+]

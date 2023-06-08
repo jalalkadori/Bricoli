@@ -1,6 +1,17 @@
 <?php 
     include("../db_connection.php");
     include("session-config.php");
+
+    // Check if the message and alert class are set in the session
+    if (isset($_SESSION['message']) && isset($_SESSION['alertClass'])) {
+        // Retrieve the message and alert class
+        $message = $_SESSION['deleteMessage'];
+        $alertClass = $_SESSION['alertClass'];
+
+        // Clear the session variables
+        unset($_SESSION['deleteMessage']);
+        unset($_SESSION['alertClass']);
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -74,6 +85,13 @@
                 </div>
                 <a type="button" class="btn text-dark" href="./nv-article">+ Ajouter un article</a>
             </div>
+            <!-- Display the deletion result message using Bootstrap alert -->
+            <?php if (isset($message) && isset($alertClass)): ?>
+                <div class="alert <?php echo $alertClass; ?> mt-3" role="alert">
+                    <?php echo $message; ?>
+                </div>
+            <?php endif; ?>
+
             <div class="row row-cols-1 row-cols-xl-2 text-center">
             <?php
                 // Fetch articles from the database
@@ -90,13 +108,25 @@
                     $articleId = $article['id_Article'];
                     $encodedTitle = urlencode($title); // URL encode the article title
 
+                     // Define an array of personalized button colors
+                    $buttonColors = array(
+                        "Peinture" => "btn-primary",
+                        "Plomberie" => "btn-secondary",
+                        "Electricité" => "btn-danger",
+                        "Carrelage" => "btn-success",
+                        "Electroménager" => "btn-warning",
+                        "Montage de meubles" => "btn-dark"
+                    );
+                    // Determine the button color based on the category
+                    $buttonColor = isset($buttonColors[$category]) ? $buttonColors[$category] : "btn-primary";
+
                     // HTML code for displaying the article
                     echo '<div class="col mb-2">';
-                    echo '        <div class="card border-0 text-white">';
-                    echo '            <img class="card-img img-fluid" src="' . $imgUrl . '" alt="Article image">';
+                    echo '        <div class="card border-0 text-white rounded h-100 ">';
+                    echo '            <img class="card-img img-fluid h-100" src="' . $imgUrl . '" alt="Article image">';
                     echo '            <div class="card-img-overlay d-flex flex-column justify-content-end align-items-end p-0">';
                     echo '                <div class="text-end w-100">';
-                    echo '                    <span class="btn btn-warning rounded-0">' . $category . '</span>';
+                    echo '                    <span class="btn ' . $buttonColor . ' rounded-0">' . $category . '</span>';
                     echo '                </div>';
                     echo '                <div class="text-start w-100 px-2 py-1 bg-dark" style="--bs-bg-opacity: .5;">';
                     echo '                    <h5 class="card-title">' . $title . '</h5>';
