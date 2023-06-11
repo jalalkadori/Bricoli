@@ -1,25 +1,3 @@
-// // Fetch the JSON data from the server
-// fetch('../json/category.json')
-// .then(response => response.json())
-// .then(data => {
-//     // Get the select element
-//     const selectElement = document.getElementById('categorie');
-
-//     // Iterate over each category and create an option element
-//     data.forEach(category => {
-//         const option = document.createElement('option');
-//         option.value = category.category;
-//         option.textContent = category.category;
-//         selectElement.appendChild(option);
-//     });
-
-// })
-// .catch(error => {
-//     // Handle any errors that occurred during fetching or parsing the JSON data
-//     const errorMessage = document.getElementById('error-message');
-//     errorMessage.textContent = 'Failed to fetch or parse JSON data.';
-// });
-
 // Define a variable to store the fetched data
 let categoriesData = null;
 

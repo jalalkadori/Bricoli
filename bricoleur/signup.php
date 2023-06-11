@@ -178,13 +178,21 @@
     <section class="container justify-centent-center align-items-center mt-5 py-5 vh-75 ">
 
         <div class="row py-5 bg-light">
-            <div class="col-4"></div>
-            <div class="col-8">
+            <div class="col-12 col-lg-4"></div>
+            <div class="col-12 col-lg-8">
                 <h2>Créez votre compte BRICOLI</h2>
                 <form method="POST" action="" enctype="multipart/form-data">
                     <div class="form-group mb-3">
                         <label for="nom_bricoleur">Nom</label>
                         <input type="text" class="form-control rounded-0" id="nom_bricoleur" name="nom_bricoleur" value="<?php echo isset($_POST['nom_bricoleur']) ? htmlspecialchars($_POST['nom_bricoleur']) : ''; ?>">
+                        <!-- isset($_POST['cin_bricoleur']): This checks if the cin_bricoleur field exists in the $_POST array, which contains data submitted via the HTTP POST method. It determines whether the form has been submitted and the input field has a value.
+
+                        ?: This is the ternary operator in PHP. It allows for a shorthand if-else statement.
+
+                        htmlspecialchars($_POST['cin_bricoleur']): If the cin_bricoleur field is set, this part uses the htmlspecialchars function to sanitize the value. It converts special characters to their corresponding HTML entities to prevent any potential security issues, such as cross-site scripting (XSS) attacks.
+
+                        : '': If the cin_bricoleur field is not set, this part provides a default empty value. It ensures that an empty string is displayed if the field is not populated. -->
+
                         <?php if (isset($errors['nom'])) echo '<span class="text-danger">' . $errors['nom'] . '</span>'; ?>
                     </div>
                     <div class="form-group mb-3">
