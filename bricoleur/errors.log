@@ -1,0 +1,6 @@
+[10-Jun-2023 17:09:25 UTC] PHP Warning:  Undefined array key "img_profile" in C:\wamp64\www\Bricoli\bricoleur\signup.php on line 68
+[10-Jun-2023 17:09:25 UTC] PHP Stack trace:
+[10-Jun-2023 17:09:25 UTC] PHP   1. {main}() C:\wamp64\www\Bricoli\bricoleur\signup.php:0
+[10-Jun-2023 17:09:39 UTC] PHP Warning:  Undefined array key "img_profile" in C:\wamp64\www\Bricoli\bricoleur\signup.php on line 68
+[10-Jun-2023 17:09:39 UTC] PHP Stack trace:
+[10-Jun-2023 17:09:39 UTC] PHP   1. {main}() C:\wamp64\www\Bricoli\bricoleur\signup.php:0
