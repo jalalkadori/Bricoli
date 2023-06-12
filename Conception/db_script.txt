@@ -62,6 +62,7 @@ CREATE TABLE Article(
    Titre_article VARCHAR(120),
    corp_article VARCHAR(8000),
    categorie_acticle VARCHAR(50),
+   img_url VARCHAR(255),
    date_publication DATE,
    ecrivain_nom VARCHAR(50),
    id_admin INT NOT NULL,

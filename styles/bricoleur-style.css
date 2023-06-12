@@ -4,3 +4,7 @@ body{
     background-attachment: fixed;
     background-size: cover;
 }
+.hover-yellow:hover {
+    color: #FFCB09;
+    cursor: pointer;
+  }

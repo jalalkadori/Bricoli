@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 02, 2023 at 11:59 AM
+-- Generation Time: Jun 12, 2023 at 04:01 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -36,7 +36,14 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `mdp_admin` varchar(255) DEFAULT NULL,
   `tele_admin` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id_admin`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `nom_admin`, `prenom_admin`, `email_admin`, `mdp_admin`, `tele_admin`) VALUES
+(1, 'KADDOURI', 'Jalal', 'jalalkadori2@gmail.com', '$2y$10$eOPLTT/NYSKN0M960zuFA.1Fy0wq2vew0IswvtR1usR2vtC.2Ft9q', '0601020304');
 
 -- --------------------------------------------------------
 
@@ -50,12 +57,20 @@ CREATE TABLE IF NOT EXISTS `article` (
   `titre_article` varchar(120) DEFAULT NULL,
   `corp_article` varchar(8000) DEFAULT NULL,
   `categorie_acticle` varchar(50) DEFAULT NULL,
+  `img_url` varchar(255) NOT NULL,
   `date_publication` date DEFAULT NULL,
   `ecrivain_nom` varchar(50) DEFAULT NULL,
   `id_admin` int NOT NULL,
   PRIMARY KEY (`id_Article`),
   KEY `id_admin` (`id_admin`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `article`
+--
+
+INSERT INTO `article` (`id_Article`, `titre_article`, `corp_article`, `categorie_acticle`, `img_url`, `date_publication`, `ecrivain_nom`, `id_admin`) VALUES
+(1, 'Comment peindre un mur ?', 'Comment peindre un mur intérieur ou bien un mur extérieur ? Suivez dans cet article les conseils et les détails des étapes à suivre pour bien peindre son mur.\r\n\r\ncomment peindre un mur ? \r\nLes bonnes techniques pour peindre un mur convenablement\r\nComment peindre un mur intérieur ou bien un mur extérieur ? Voilà la première question qui se pose quand vous songez à refaçonner votre propriété. Peindre les murs forme un travail de bricolage à la portée de tous qui nécessite la disposition d’un éventail d’astuces. \r\n\r\nA priori, la préparation au niveau logistique reste l’étape la plus indispensable. S’en suit l’adoption de quelques techniques de peinture. Suivez dans cet article les conseils et les détails des étapes à suivre pour bien peindre son mur.', 'Peinture', '../images/blog/articles/6486d682e7124_peinture.jpg', '2023-06-12', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -79,7 +94,15 @@ CREATE TABLE IF NOT EXISTS `bricoleur` (
   `id_admin` int DEFAULT NULL,
   PRIMARY KEY (`id_bricoleur`),
   KEY `id_admin` (`id_admin`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `bricoleur`
+--
+
+INSERT INTO `bricoleur` (`id_bricoleur`, `nom_bricoleur`, `prenom_bricoleur`, `tele_bricoleur`, `cin_bricoleur`, `adresse_bricoleur`, `ville_bricoleur`, `img_profile`, `cin_img_bricoleur`, `email`, `mdp_bricoleur`, `id_admin`) VALUES
+(2, 'KADDOURI', 'Jalal', '0601020304', '00000000', '1 rue de la marche verte', 'Tanger', 'uploads/user.jpg', NULL, 'jalalkadori2@gmail.com', '$2y$10$j.NKOHGtHRP5HfZJ/f/VuuMfZ3RUj44JqO2VoNoPxm.Q6MsJzV4M.', 1),
+(4, 'Jamali', 'Fati', '0601020306', 'CD291819', 'A rue moukhtari', 'Fes', '../images/bricoleur/profil/64873f5a06deb.jpg', NULL, 'jamalifati@gmail.com', 'Admin2023', 1);
 
 -- --------------------------------------------------------
 

@@ -89,7 +89,7 @@
                         $_SESSION['bricoleurNom'] = $row['nom_bricoleur'];
                         $_SESSION['bricoleurID'] = $row['id_bricoleur'];
                         // Redirect the user to the dashboard page
-                        header("Location: profil");
+                        header("Location: profil.php");
                         exit();
                     } else {
                         // Password is incorrect

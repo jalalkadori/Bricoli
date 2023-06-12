@@ -1,6 +1,6 @@
 <?php 
     include("./db_connection.php");
-
+    session_start();
 ?>
 
 <!doctype html>
@@ -33,7 +33,6 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Se connecter <i class="fa-solid fa-right-to-bracket"></i>
@@ -43,9 +42,7 @@
                                 <li><a class="dropdown-item" href="#">Chercheur</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./bricoleur/signup.php">Devenir Bricoleur</a>
-                        </li>
+                       
                     </ul>
                     
                 </div>

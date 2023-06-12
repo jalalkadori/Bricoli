@@ -78,9 +78,13 @@
 
             if (empty($cin)) {
                 $errors['cin'] = "Le champ 'CIN' est requis.";
-            } elseif (!preg_match('/^\d{8}$/', $cin)) {
-                $errors['cin'] = "Le champ 'CIN' doit contenir 8 chiffres.";
-            }
+            } elseif (!preg_match('/^[A-Z]{2}\d{6}$/', $cin)) {
+                $errors['cin'] = "Le champ 'CIN' doit respecter le format LL000000.";
+            } 
+            // ^ indicates the start of the string.
+            // [A-Z]{2} matches any two uppercase letters from A to Z.
+            // \d{6} matches exactly 6 digits.
+            // $ indicates the end of the string.           
 
             if (empty($adresse)) {
                 $errors['adresse'] = "Le champ 'Adresse' est requis.";
@@ -90,7 +94,7 @@
                 $errors['ville'] = "Le champ 'Ville' est requis.";
             }
 
-            // Check if a new image is uploaded
+             // Check if a new image is uploaded
             if (!empty($_FILES['img_profile']['name'])) {
                 $imgProfile = $_FILES['img_profile'];
 
@@ -120,7 +124,6 @@
                 $errors['img_profile'] = 'Veuillez choisir votre image de profil.';
             }
 
-
             if (empty($email)) {
                 $errors['email'] = "Le champ 'Email' est requis.";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -133,42 +136,39 @@
 
             // If there are no validation errors, proceed with inserting the data into the database
             if (empty($errors)) {
-                $imgProfilePath = 'uploads/' . $imgProfile['name'];
-                //move the file to the destination folder
-                $targetFolder = 'images/bricoleur/profil/';
+                // Move the uploaded file to the target folder
+                $targetFolder = '../images/bricoleur/profil/';
                 $targetFilename = uniqid() . '.' . $fileExtension;
                 $targetPath = $targetFolder . $targetFilename;
-                // Move the uploaded file to the target folder
+
                 if (move_uploaded_file($imgProfile['tmp_name'], $targetPath)) {
-                    // File moved successfully
+                    // Hash the password
+                    $hashedPassword = password_hash($mdp, PASSWORD_DEFAULT);
+                    // Prepare the INSERT statement
+                    $stmt = $db_connection->prepare("INSERT INTO bricoleur (id_bricoleur, nom_bricoleur, prenom_bricoleur, tele_bricoleur, cin_bricoleur, adresse_bricoleur, ville_bricoleur, img_profile, email, mdp_bricoleur, id_admin) VALUES (NULL, :nom, :prenom, :telephone, :cin, :adresse, :ville, :img_profile, :email, :mdp, 1)");
+
+                    // Bind the parameters
+                    $stmt->bindParam(':nom', $nom);
+                    $stmt->bindParam(':prenom', $prenom);
+                    $stmt->bindParam(':telephone', $telephone);
+                    $stmt->bindParam(':cin', $cin);
+                    $stmt->bindParam(':adresse', $adresse);
+                    $stmt->bindParam(':ville', $ville);
+                    $stmt->bindParam(':img_profile', $targetPath);
+                    $stmt->bindParam(':email', $email);
+                    $stmt->bindParam(':mdp', $hashedPassword);
+
+                    // Execute the query
+                    if ($stmt->execute()) {
+                        // Redirect the user to a success page
+                        header('Location: login.php');
+                        exit;
+                    } else {
+                        // Handle the database error
+                        $errors['database'] = "Une erreur s'est produite lors de l'ajout des données dans la base de données.";
+                    }
                 } else {
                     $errors['img_profile'] = 'Error moving the file to the destination folder.';
-                }
-
-                // Hash the password
-                $hashedPassword = password_hash($mdp, PASSWORD_DEFAULT);
-                // Prepare the INSERT statement
-                $stmt = $db_connection->prepare("INSERT INTO bricoleur (id_bricoleur, nom_bricoleur, prenom_bricoleur, tele_bricoleur, cin_bricoleur, adresse_bricoleur, ville_bricoleur, img_profile, email, mdp_bricoleur, id_admin) VALUES (NULL, :nom, :prenom, :telephone, :cin, :adresse, :ville, :img_profile, :email, :mdp, 1)");
-
-                // Bind the parameters
-                $stmt->bindParam(':nom', $nom);
-                $stmt->bindParam(':prenom', $prenom);
-                $stmt->bindParam(':telephone', $telephone);
-                $stmt->bindParam(':cin', $cin);
-                $stmt->bindParam(':adresse', $adresse);
-                $stmt->bindParam(':ville', $ville);
-                $stmt->bindParam(':img_profile', $imgProfilePath);
-                $stmt->bindParam(':email', $email);
-                $stmt->bindParam(':mdp', $hashedPassword);
-
-                // Execute the query
-                if ($stmt->execute()) {
-                    // Redirect the user to a success page
-                    header('Location: login.php');
-                    exit;
-                } else {
-                    // Handle the database error
-                    $errors['database'] = "Une erreur s'est produite lors de l'ajout des données dans la base de données.";
                 }
             }
         }
@@ -235,7 +235,7 @@
                         <input type="password" class="form-control rounded-0" id="mdp_bricoleur" name="mdp_bricoleur" value="<?php echo isset($_POST['mdp_bricoleur']) ? htmlspecialchars($_POST['mdp_bricoleur']) : ''; ?>">
                         <?php if (isset($errors['mdp'])) echo '<span class="text-danger">' . $errors['mdp'] . '</span>'; ?>
                     </div>
-                    <button type="submit" class="btn btn-black rounded-0">S'inscrire</button>
+                    <button type="submit" class="btn btn-dark w-100 rounded-0">S'inscrire</button>
                 </form>
             </div>
         </div>
