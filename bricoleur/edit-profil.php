@@ -64,7 +64,7 @@
         $ville = $userInfos['ville_bricoleur'];
         $imgProfile = $userInfos['img_profile'];
         $email = $userInfos['email'];
-        $mdp = $userInfos['mdp_bricoleur'];
+
 
         // Function to sanitize and validate input data
         function sanitizeInput($input)
@@ -89,6 +89,10 @@
             $imgProfile = $_FILES['img_profile'];
             $email = sanitizeInput($_POST['email']);
             $mdp = sanitizeInput($_POST['mdp_bricoleur']);
+            // Hash the password
+            $hashedPassword = password_hash($mdp, PASSWORD_DEFAULT);
+
+            
 
             // Perform validation checks on the input data
             if (empty($nom)) {
@@ -145,6 +149,19 @@
                     }
                 }
             }
+            if(empty($mdp)){
+                $errors['mdp'] = "Le champ 'Mot de passe' est requis.";
+            } elseif (strlen($mdp) < 8) {
+                $errors['mdp'] = "Le champ 'Mot de passe' doit contenir au moins 8 caractères.";
+            } elseif (!preg_match('/[A-Z]/', $mdp)) {
+                $errors['mdp'] = "Le champ 'Mot de passe' doit contenir au moins une lettre majuscule.";
+            } elseif (!preg_match('/[a-z]/', $mdp)) {
+                $errors['mdp'] = "Le champ 'Mot de passe' doit contenir au moins une lettre minuscule.";
+            } elseif (!preg_match('/\d/', $mdp)) {
+                $errors['mdp'] = "Le champ 'Mot de passe' doit contenir au moins un chiffre.";
+            } elseif (!preg_match('/[^A-Za-z\d]/', $mdp)) {
+                $errors['mdp'] = "Le champ 'Mot de passe' doit contenir au moins un caractère spécial.";
+            }
 
             if (empty($email)) {
                 $errors['email'] = "Le champ 'Email' est requis.";
@@ -152,9 +169,6 @@
                 $errors['email'] = "Le champ 'Email' n'est pas valide.";
             }
 
-            if (empty($mdp)) {
-                $errors['mdp'] = "Le champ 'Mot de passe' est requis.";
-            }
 
             // If there are no validation errors, proceed with updating the data in the database
             if (empty($errors)) {
@@ -178,13 +192,13 @@
                         $stmt->bindParam(':ville', $ville);
                         $stmt->bindParam(':img_profile', $targetPath);
                         $stmt->bindParam(':email', $email);
-                        $stmt->bindParam(':mdp', $mdp);
+                        $stmt->bindParam(':mdp', $hashedPassword);
                         $stmt->bindParam(':bricoleurId', $Id_bricoleur);
 
                         // Execute the query
                         if ($stmt->execute()) {
                             // Redirect the user to a success page
-                            header('Location: success.php');
+                            header('Location: profil.php');
                             exit;
                         } else {
                             // Handle the database error
@@ -205,8 +219,10 @@
                     $stmt->bindParam(':adresse', $adresse);
                     $stmt->bindParam(':ville', $ville);
                     $stmt->bindParam(':email', $email);
-                    $stmt->bindParam(':mdp', $mdp);
+                    $stmt->bindParam(':mdp', $hashedPassword);
                     $stmt->bindParam(':bricoleurId', $Id_bricoleur);
+                     // Display optional image modification message
+                    $optionalImageMessage = "La modification de l'image est facultative. Si vous ne souhaitez pas modifier l'image, veuillez laisser ce champ vide.";
 
                     // Execute the query
                     if ($stmt->execute()) {
@@ -223,17 +239,20 @@
     ?>
 
 
-<main>
-    <section class="container justify-centent-center align-items-center mt-5">
+<main class="container-fluid mt-5">
+    <section class="container">
+        <div class="row bg-white ">
+            <div class="col-12 col-lg-4 border d-flex justify-content-center align-items-center border-success d-none d-lg-flex">
+                <img src="<?php echo $imgProfile; ?>" class="w-50 img-fluid rounded-circle" alt="Image de profil" style="margin: 0 auto;">
+            </div>
 
-        <div class="row bg-light">
-            <!-- <div class="col-12 col-lg-4"></div> -->
-            
-            <div class="col-12 bg-white border rounded border-dark">
-                <h2 class="py-4">Modification de vos informations personnelles</h2>
-                <?php echo $userInfos['nom'];?>
-                <form method="POST" action="" enctype="multipart/form-data">
-                    <div class="row">
+
+
+            <div class="col-12 col-lg-8 border rounded py-5">
+                <h2 class="">Modification de vos informations personnelles</h2>
+                <hr class="border border-warning border-2 opacity-25">
+                <form method="POST" action="" enctype="multipart/form-data" class="p-2">
+                    <div class="row row-cols-1 row-cols-md-3">
                         <div class="col form-group mb-3">
                             <label for="nom_bricoleur">Nom</label>
                             <input type="text" class="form-control  border-black" id="nom_bricoleur" name="nom_bricoleur" value="<?php echo $nom; ?>">
@@ -250,7 +269,7 @@
                             <?php if (isset($errors['cin'])) echo '<span class="text-danger">' . $errors['cin'] . '</span>'; ?>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row  row-cols-1 row-cols-md-3">
                         <div class="col form-group mb-3">
                             <label for="tele_bricoleur">Téléphone</label>
                             <input type="text" class="form-control  border-black" id="tele_bricoleur" name="tele_bricoleur" value="<?php echo $telephone; ?>">
@@ -267,11 +286,13 @@
                             <?php if (isset($errors['ville'])) echo '<span class="text-danger">' . $errors['ville'] . '</span>'; ?>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row  row-cols-1 row-cols-md-3">
                         <div class="col form-group mb-3">
-                            <label for="img_profile">Image de profil</label>
+                            <label for="img_profile">Image de profil <span class="text-danger">*</span></label>
                             <input type="file" class="form-control  border-black" id="img_profile" name="img_profile">
                             <?php if (isset($errors['img_profile'])) echo '<span class="text-danger">' . $errors['img_profile'] . '</span>'; ?>
+                            <!-- Optional image modification message -->
+                            <div class="form-text text-danger">*Modification image facultative. Laissez ce champ vide pour conserver l'image actuelle.</div>
                         </div>
                         <div class="col form-group mb-3">
                             <label for="email">Email</label>
@@ -281,18 +302,17 @@
                         <div class="col form-group mb-3">
                             <label for="mdp_bricoleur">Mot de passe</label>
                             <div class="input-group">
-                                <input type="password" class="form-control  border-black" id="passwordField" name="mdp_bricoleur" value="<?php echo $password; ?>">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <input type="checkbox" onclick="togglePasswordVisibility()"> Afficher   
+                                <input type="password" class="form-control  border-black" id="passwordField" name="mdp_bricoleur" value="">
+                                <span class="input-group-text border-dark bg-white">
+                                    <input type="checkbox" class="form-check-input border border-dark" onclick="togglePasswordVisibility()">   
                                 </span>
                             </div>
                             <?php if (isset($errors['mdp'])) echo '<span class="text-danger">' . $errors['mdp'] . '</span>'; ?>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-dark w-100  border-black">Enregistrer les modifications</button>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-primary me-md-2" type="button">Button</button>
-                        <button class="btn btn-primary" type="button">Button</button>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
+                        <a href="profil" class="btn btn-danger w-25">Annuler</a>
+                        <button type="submit" class="btn btn-dark w-25 border-black">Enregistrer les modifications</button>
                     </div>
                 </form>
 

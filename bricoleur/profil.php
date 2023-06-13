@@ -86,7 +86,7 @@
                 <div class="mb-3 d-flex justify-content-between align-items-center">
                     <h3 class="fw-bolder">Mon compte</h3>
                     <a href="edit-profil.php" class="btn fw-bolder hover-yellow" data-bs-toggle="tooltip" data-bs-placement="top" title="Your tooltip message">
-                    <i class="fa-solid fa-pen-to-square fs-2"></i>
+                        <i class="fa-solid fa-pen-to-square fs-2"></i>
                     </a>
                 </div>
                 <hr class="border border-warning border-2 opacity-25">
