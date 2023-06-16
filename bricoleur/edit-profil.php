@@ -15,40 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   </head>
   <body>
-  <header class="container-fluid bg-light">
-        <nav class="navbar navbar-expand-lg ">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="profil">
-                    <img src="../logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="150">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse fw-semibold text-uppercase" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="contacte">Contactez-Nous</a> 
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#blog">Blog</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0 pe-3">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <?php echo $_SESSION['bricoleurNom']; ?>
-                                <i class="fa-sharp fa-solid fa-user fa-sm ml-2"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="logout">Déconnexion</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    
-                </div>
-            </div>
-        </nav>
-    </header>
+ 
     <?php
         // Retrieve the user's current information from the database
         $stmt = $db_connection->prepare("SELECT * FROM bricoleur WHERE id_bricoleur = :bricoleurId");
@@ -239,17 +206,50 @@
     ?>
 
 
-<main class="container-fluid mt-5">
-    <section class="container">
-        <div class="row bg-white ">
-            <div class="col-12 col-lg-4 border d-flex justify-content-center align-items-center border-success d-none d-lg-flex">
+<main class="osition-relative vh-100">
+    <header class="container-fluid bg-white sticky-top">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="profil">
+                    <img src="../logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="150">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse fw-semibold text-uppercase" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacte">Contactez-Nous</a> 
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#blog">Blog</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-2 mb-lg-0 pe-3">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?php echo $_SESSION['bricoleurNom']; ?>
+                                <i class="fa-sharp fa-solid fa-user fa-sm ml-2"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="profil">Mon Profile</a></li>
+                                <li><a class="dropdown-item" href="logout">Déconnexion</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="container center-content border rounded container-shadow my-5 my-md-0 my-lg-0">
+        <div class="row bg-white">
+            <div class="col-12 col-lg-4 border d-flex justify-content-center align-items-center d-none d-lg-flex">
                 <img src="<?php echo $imgProfile; ?>" class="w-50 img-fluid rounded-circle" alt="Image de profil" style="margin: 0 auto;">
             </div>
 
-
-
-            <div class="col-12 col-lg-8 border rounded py-5">
-                <h2 class="">Modification de vos informations personnelles</h2>
+            <div class="col-12 col-lg-8 d-flex flex-column justify-content-center border rounded ">
+                <h2 class="pt-2">Modification de vos informations personnelles</h2>
                 <hr class="border border-warning border-2 opacity-25">
                 <form method="POST" action="" enctype="multipart/form-data" class="p-2">
                     <div class="row row-cols-1 row-cols-md-3">
@@ -286,7 +286,7 @@
                             <?php if (isset($errors['ville'])) echo '<span class="text-danger">' . $errors['ville'] . '</span>'; ?>
                         </div>
                     </div>
-                    <div class="row  row-cols-1 row-cols-md-3">
+                    <div class="row row-cols-1 row-cols-md-3">
                         <div class="col form-group mb-3">
                             <label for="img_profile">Image de profil <span class="text-danger">*</span></label>
                             <input type="file" class="form-control  border-black" id="img_profile" name="img_profile">
@@ -300,7 +300,7 @@
                             <?php if (isset($errors['email'])) echo '<span class="text-danger">' . $errors['email'] . '</span>'; ?>
                         </div>
                         <div class="col form-group mb-3">
-                            <label for="mdp_bricoleur">Mot de passe</label>
+                            <label for="mdp_bricoleur">Mot de passe</label> 
                             <div class="input-group">
                                 <input type="password" class="form-control  border-black" id="passwordField" name="mdp_bricoleur" value="">
                                 <span class="input-group-text border-dark bg-white">
@@ -310,12 +310,11 @@
                             <?php if (isset($errors['mdp'])) echo '<span class="text-danger">' . $errors['mdp'] . '</span>'; ?>
                         </div>
                     </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
-                        <a href="profil" class="btn btn-danger w-25">Annuler</a>
-                        <button type="submit" class="btn btn-dark w-25 border-black">Enregistrer les modifications</button>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end py-2">
+                        <a href="profil" class="btn btn-danger">Annuler</a>
+                        <button type="submit" class="btn btn-dark">Enregistrer les modifications</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </section>
@@ -328,19 +327,8 @@
         
     </footer>
 
-    <script>
-        // add a class to all input fields to maje the border rounded-0 and color black
-        document.getElementByTagName("input").add
-        function togglePasswordVisibility() {
-            var passwordField = document.getElementById("passwordField");
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-            } else {
-                passwordField.type = "password";
-            }
-        }
-    </script>
-    
+    <script src="../js/script.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>
 </html>

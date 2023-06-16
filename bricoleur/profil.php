@@ -41,11 +41,11 @@
                                 <i class="fa-sharp fa-solid fa-user fa-sm ml-2"></i>
                             </a>
                             <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="profil">Mon Profile</a></li>
                                 <li><a class="dropdown-item" href="logout">Déconnexion</a></li>
                             </ul>
                         </li>
                     </ul>
-                    
                 </div>
             </div>
         </nav>
@@ -55,7 +55,7 @@
     <main>
         <section class="container-fluid mt-5">
             <div class="mb-3 text-start py-2 px-5">
-                <h2 class="fw-bold">Mon Profil</h2>
+                <h2 class="fw-bold">Mon Profile</h2>
             </div>
             <div class="row px-5 gap-5">
             <?php

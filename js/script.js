@@ -46,4 +46,18 @@ if (!categoriesData) {
   populateCategoriesSelect(selectedCategory);
 }
 
-
+/*******************
+ * hide and show the password feild whebe clicking on the checkbox 
+ *******************/
+document.getElementByTagName("input").add
+function togglePasswordVisibility() {
+    var passwordField = document.getElementById("passwordField");
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+    } else {
+        passwordField.type = "password";
+    }
+}
+/*******************
+ * hide and show the password feild whebe clicking on the checkbox 
+ *******************/

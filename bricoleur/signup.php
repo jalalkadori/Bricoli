@@ -13,31 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   </head>
   <body>
-    <header class="container-fluid bg-light fixed-top">
-        <nav class="navbar navbar-expand-lg ">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="../index.php">
-                    <img src="../logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="150">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse fw-semibold text-uppercase" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="contacte">Contactez-Nous</a> 
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="login">Se Connecter <i class="fa-solid fa-right-to-bracket"></i></a> 
-                        </li>
-                    </ul>
-                    
-                </div>
-            </div>
-        </nav>
-    </header>
+    
     <?php
         // Function to sanitize and validate input data
         function sanitizeInput($input) {
@@ -174,68 +150,103 @@
         }
     ?>
 
-<main>
-    <section class="container justify-centent-center align-items-center mt-5 py-5 vh-75 ">
+<main class="position-relative vh-100">
+    <header class="container-fluid bg-light sticky-top">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../index.php">
+                    <img src="../logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="150">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse fw-semibold text-uppercase" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacte">Contactez-Nous</a> 
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="login">Se Connecter <i class="fa-solid fa-right-to-bracket"></i></a> 
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+    </header>
 
-        <div class="row py-5 bg-light">
-            <div class="col-12 col-lg-4"></div>
-            <div class="col-12 col-lg-8">
+    <section class="container center-content border rounded container-shadow my-5 my-md-0 my-lg-0">
+        <div class="row py-3 bg-white">
+            <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center d-none d-lg-flex">
+                <img src="../images/bricoleur/illustrations/login.svg" class="" alt="login illustration" srcset="login illustration">
+            </div> 
+            <div class="col-12 col-lg-8 d-flex flex-column justify-content-center border rounded ">
                 <h2>Créez votre compte BRICOLI</h2>
+                <hr class="border border-warning border-2 opacity-25">
                 <form method="POST" action="" enctype="multipart/form-data">
-                    <div class="form-group mb-3">
-                        <label for="nom_bricoleur">Nom</label>
-                        <input type="text" class="form-control rounded-0" id="nom_bricoleur" name="nom_bricoleur" value="<?php echo isset($_POST['nom_bricoleur']) ? htmlspecialchars($_POST['nom_bricoleur']) : ''; ?>">
-                        <!-- isset($_POST['cin_bricoleur']): This checks if the cin_bricoleur field exists in the $_POST array, which contains data submitted via the HTTP POST method. It determines whether the form has been submitted and the input field has a value.
+                    <div class="row row-cols-1 row-cols-md-3">
+                        <div class="form-group mb-3">
+                            <label for="nom_bricoleur">Nom</label>
+                            <input type="text" class="form-control border-black" id="nom_bricoleur" name="nom_bricoleur" value="<?php echo isset($_POST['nom_bricoleur']) ? htmlspecialchars($_POST['nom_bricoleur']) : ''; ?>">
+                            <!-- isset($_POST['cin_bricoleur']): This checks if the cin_bricoleur field exists in the $_POST array, which contains data submitted via the HTTP POST method. It determines whether the form has been submitted and the input field has a value.
 
-                        ?: This is the ternary operator in PHP. It allows for a shorthand if-else statement.
+                            ?: This is the ternary operator in PHP. It allows for a shorthand if-else statement.
 
-                        htmlspecialchars($_POST['cin_bricoleur']): If the cin_bricoleur field is set, this part uses the htmlspecialchars function to sanitize the value. It converts special characters to their corresponding HTML entities to prevent any potential security issues, such as cross-site scripting (XSS) attacks.
+                            htmlspecialchars($_POST['cin_bricoleur']): If the cin_bricoleur field is set, this part uses the htmlspecialchars function to sanitize the value. It converts special characters to their corresponding HTML entities to prevent any potential security issues, such as cross-site scripting (XSS) attacks.
 
-                        : '': If the cin_bricoleur field is not set, this part provides a default empty value. It ensures that an empty string is displayed if the field is not populated. -->
+                            : '': If the cin_bricoleur field is not set, this part provides a default empty value. It ensures that an empty string is displayed if the field is not populated. -->
 
-                        <?php if (isset($errors['nom'])) echo '<span class="text-danger">' . $errors['nom'] . '</span>'; ?>
+                            <?php if (isset($errors['nom'])) echo '<span class="text-danger">' . $errors['nom'] . '</span>'; ?>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="prenom_bricoleur">Prénom</label>
+                            <input type="text" class="form-control border-black" id="prenom_bricoleur" name="prenom_bricoleur" value="<?php echo isset($_POST['prenom_bricoleur']) ? htmlspecialchars($_POST['prenom_bricoleur']) : ''; ?>">
+                            <?php if (isset($errors['prenom'])) echo '<span class="text-danger">' . $errors['prenom'] . '</span>'; ?>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="tele_bricoleur">Téléphone</label>
+                            <input type="text" class="form-control border-black" id="tele_bricoleur" name="tele_bricoleur" value="<?php echo isset($_POST['tele_bricoleur']) ? htmlspecialchars($_POST['tele_bricoleur']) : ''; ?>">
+                            <?php if (isset($errors['telephone'])) echo '<span class="text-danger">' . $errors['telephone'] . '</span>'; ?>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="cin_bricoleur">CIN</label>
+                            <input type="text" class="form-control border-black" id="cin_bricoleur" name="cin_bricoleur" value="<?php echo isset($_POST['cin_bricoleur']) ? htmlspecialchars($_POST['cin_bricoleur']) : ''; ?>">
+                            <?php if (isset($errors['cin'])) echo '<span class="text-danger">' . $errors['cin'] . '</span>'; ?>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="adresse_bricoleur">Adresse</label>
+                            <input type="text" class="form-control border-black" id="adresse_bricoleur" name="adresse_bricoleur" value="<?php echo isset($_POST['adresse_bricoleur']) ? htmlspecialchars($_POST['adresse_bricoleur']) : ''; ?>">
+                            <?php if (isset($errors['adresse'])) echo '<span class="text-danger">' . $errors['adresse'] . '</span>'; ?>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="ville_bricoleur">Ville</label>
+                            <input type="text" class="form-control border-black" id="ville_bricoleur" name="ville_bricoleur" value="<?php echo isset($_POST['ville_bricoleur']) ? htmlspecialchars($_POST['ville_bricoleur']) : ''; ?>">
+                            <?php if (isset($errors['ville'])) echo '<span class="text-danger">' . $errors['ville'] . '</span>'; ?>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="img_profile">Image de profil</label>
+                            <input type="file" class="form-control border-black" id="img_profile" name="img_profile">
+                            <?php if (isset($errors['img_profile'])) echo '<span class="text-danger">' . $errors['img_profile'] . '</span>'; ?>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control border-black" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                            <?php if (isset($errors['email'])) echo '<span class="text-danger">' . $errors['email'] . '</span>'; ?>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="mdp_bricoleur">Mot de passe</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control border-black border border-dark" id="passwordField" name="mdp_bricoleur" value="<?php echo isset($_POST['mdp_bricoleur']) ? htmlspecialchars($_POST['mdp_bricoleur']) : ''; ?>">
+                                <?php if (isset($errors['mdp'])) echo '<span class="text-danger">' . $errors['mdp'] . '</span>'; ?>
+                                <span class="input-group-text border-dark bg-white">
+                                    <input type="checkbox" class="form-check-input border border-dark" onclick="togglePasswordVisibility()">   
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="prenom_bricoleur">Prénom</label>
-                        <input type="text" class="form-control rounded-0" id="prenom_bricoleur" name="prenom_bricoleur" value="<?php echo isset($_POST['prenom_bricoleur']) ? htmlspecialchars($_POST['prenom_bricoleur']) : ''; ?>">
-                        <?php if (isset($errors['prenom'])) echo '<span class="text-danger">' . $errors['prenom'] . '</span>'; ?>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="tele_bricoleur">Téléphone</label>
-                        <input type="text" class="form-control rounded-0" id="tele_bricoleur" name="tele_bricoleur" value="<?php echo isset($_POST['tele_bricoleur']) ? htmlspecialchars($_POST['tele_bricoleur']) : ''; ?>">
-                        <?php if (isset($errors['telephone'])) echo '<span class="text-danger">' . $errors['telephone'] . '</span>'; ?>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="cin_bricoleur">CIN</label>
-                        <input type="text" class="form-control rounded-0" id="cin_bricoleur" name="cin_bricoleur" value="<?php echo isset($_POST['cin_bricoleur']) ? htmlspecialchars($_POST['cin_bricoleur']) : ''; ?>">
-                        <?php if (isset($errors['cin'])) echo '<span class="text-danger">' . $errors['cin'] . '</span>'; ?>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="adresse_bricoleur">Adresse</label>
-                        <input type="text" class="form-control rounded-0" id="adresse_bricoleur" name="adresse_bricoleur" value="<?php echo isset($_POST['adresse_bricoleur']) ? htmlspecialchars($_POST['adresse_bricoleur']) : ''; ?>">
-                        <?php if (isset($errors['adresse'])) echo '<span class="text-danger">' . $errors['adresse'] . '</span>'; ?>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="ville_bricoleur">Ville</label>
-                        <input type="text" class="form-control rounded-0" id="ville_bricoleur" name="ville_bricoleur" value="<?php echo isset($_POST['ville_bricoleur']) ? htmlspecialchars($_POST['ville_bricoleur']) : ''; ?>">
-                        <?php if (isset($errors['ville'])) echo '<span class="text-danger">' . $errors['ville'] . '</span>'; ?>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="img_profile">Image de profil</label>
-                        <input type="file" class="form-control rounded-0" id="img_profile" name="img_profile">
-                        <?php if (isset($errors['img_profile'])) echo '<span class="text-danger">' . $errors['img_profile'] . '</span>'; ?>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control rounded-0" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
-                        <?php if (isset($errors['email'])) echo '<span class="text-danger">' . $errors['email'] . '</span>'; ?>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="mdp_bricoleur">Mot de passe</label>
-                        <input type="password" class="form-control rounded-0" id="mdp_bricoleur" name="mdp_bricoleur" value="<?php echo isset($_POST['mdp_bricoleur']) ? htmlspecialchars($_POST['mdp_bricoleur']) : ''; ?>">
-                        <?php if (isset($errors['mdp'])) echo '<span class="text-danger">' . $errors['mdp'] . '</span>'; ?>
-                    </div>
-                    <button type="submit" class="btn btn-dark w-100 rounded-0">S'inscrire</button>
+                    <button type="submit" class="btn btn-dark w-100">S'inscrire</button>
                 </form>
             </div>
         </div>
@@ -248,7 +259,7 @@
     <footer class="container-fluid bg-dark">
         
     </footer>
-    
+    <script src="../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>
 </html>

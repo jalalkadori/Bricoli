@@ -13,33 +13,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   </head>
   <body>
-    <header class="container-fluid bg-light fixed-top">
-        <nav class="navbar navbar-expand-lg ">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="../index.php">
-                    <img src="../logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="150">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse fw-semibold text-uppercase" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="contacte">Contactez-Nous</a> 
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="./signup">S'inscrire <i class="fa-solid fa-user-plus"></i></a>
-                            
-                        </li>
-                    </ul>
-                    
-                </div>
-            </div>
-        </nav>
-    </header>
     <?php
+        // in case of password change
+        $passChangeMessage = $_GET['success'];
+
         // Function to verify the entered password against the stored hashed password
         function verifyPassword($password, $hashedPassword) {
             return password_verify($password, $hashedPassword);
@@ -103,54 +80,83 @@
         }
     ?>
 
-    <main>
-        <section class="container justify-centent-center align-items-center mt-5 py-5 vh-75 ">
-
-            <div class="row py-5 bg-light">
-                <div class="col-12 col-lg-4"></div>
+    <main class="position-relative vh-100">
+        <header class="container-fluid bg-white">   
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="../index.php">
+                        <img src="../logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="150">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse fw-semibold text-uppercase" id="navbarSupportedContent">
+                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="contacte">Contactez-Nous</a> 
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="./signup">S'inscrire <i class="fa-solid fa-user-plus"></i></a>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <section class="container center-content rounded-5 container-shadow mt-5 m-md-0 m-lg-0">
+            <div class="row py-5 bg-white align-items-center">
+                <div class="col-12 col-lg-4 d-none d-lg-flex">
+                    <img src="../images/bricoleur/illustrations/login.svg" class="" alt="login illustration" srcset="login illustration">
+                </div>
                 <div class="col-12 col-lg-8">
-                    <h2 class="text-center">Accédez à votre compte BRIKOLI</h2>
-
+                    <?php if (!empty($passChangeMessage)) : ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $passChangeMessage; ?>
+                        </div>
+                    <?php endif; ?>
+                    <h2 class="text-center">Accédez à votre compte BRICOLI</h2>
+                     
                     <form method="post" action="login.php" class="w-100">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Address Email </label>
-                            <input type="email" class="form-control" name="email">
-                        </div>
-                        <?php if (!empty($emailError)) : ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?php echo $emailError; ?>
+                        <div class="border border-dark rounded px-2 py-4">
+                            <div class="mb-3">
+                                <label for="email" class="form-label ">Address Email </label>
+                                <input type="email" class="form-control border-dark" name="email">
                             </div>
-                        <?php endif; ?>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Mot de pass</label>
-                            <input type="password" class="form-control" name="password" id="passwordField">
-                            <input type="checkbox" class="mt-2" id="showPasswordCheckbox"> Show Password
-                        </div>
-                        <?php if (!empty($passwordError)) : ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?php echo $passwordError; ?>
+                            <?php if (!empty($emailError)) : ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo $emailError; ?>
+                                </div>
+                            <?php endif; ?>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Mot de pass</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control border-dark" id="passwordField" name="password" value="">
+                                    <span class="input-group-text border-dark bg-white">
+                                        <input type="checkbox" class="form-check-input border border-dark" onclick="togglePasswordVisibility()">   
+                                    </span>
+                                </div>
                             </div>
-                        <?php endif; ?>
-                        <button type="submit" class="btn btn-dark w-100 my-2" name="connecter">Se connecter</button>
+                            <?php if (!empty($passwordError)) : ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo $passwordError; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end py-2">
+                            <a href="./password-reset.php" class="btn text-danger text-start">Mot de pass oublié ?</a>
+                            <button type="submit" class="btn btn-dark" name="connecter">Se connecter</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <script>
-        const passwordField = document.getElementById('passwordField');
-        const showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
-
-        showPasswordCheckbox.addEventListener('change', function () {
-            if (showPasswordCheckbox.checked) {
-                passwordField.type = 'text';
-            } else {
-                passwordField.type = 'password';
-            }
-        });
-    </script>
     
+    <script src="../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>
 </html>
