@@ -16,7 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   </head>
   <body>
-    <header class="container-fluid bg-light">
+    <header class="container-fluid bg-light sticky-top">
         <nav class="navbar navbar-expand-lg ">
             <div class="container-fluid">
                 <a class="navbar-brand" href="profil">
@@ -53,42 +53,42 @@
 
 
     <main>
-        <section class="container-fluid mt-5">
-            <div class="mb-3 text-start py-2 px-5">
-                <h2 class="fw-bold">Mon Profile</h2>
-            </div>
-            <div class="row px-5 gap-5">
-            <?php
-                $stmt = $db_connection->prepare("SELECT * FROM `bricoleur` WHERE id_bricoleur = ?");
-                $stmt->execute([$Id_bricoleur]);
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        <div class="container my-3">
+            <h2 class="fw-bold">Mon Profile</h2>
+        </div>
+        <section class="container my-3 border border-dark bg-white rounded" id="profil">
+            <div class="container ">
+                <?php
+                    $stmt = $db_connection->prepare("SELECT * FROM `bricoleur` WHERE id_bricoleur = ?");
+                    $stmt->execute([$Id_bricoleur]);
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                // Check if the bricoleurID exists in the database
-                if ($row) {
-                    // Extract the values from the fetched row
-                    $nom = $row['nom_bricoleur'];
-                    $prenom = $row['prenom_bricoleur'];
-                    $cin = $row['cin_bricoleur'];
-                    $ville = $row['ville_bricoleur'];
-                    $email = $row['email'];
-                    $telephone = $row['tele_bricoleur'];
-                    $imgUrl = $row['img_profile'];
-                } else {
-                    // Handle the case when the bricoleurID does not exist in the database
-                    // For example, display an error message or redirect to an error page
-                    echo "Bricoleur ID not found in the database";
-                    exit;
-                }
-            ?>
+                    // Check if the bricoleurID exists in the database
+                    if ($row) {
+                        // Extract the values from the fetched row
+                        $nom = $row['nom_bricoleur'];
+                        $prenom = $row['prenom_bricoleur'];
+                        $cin = $row['cin_bricoleur'];
+                        $ville = $row['ville_bricoleur'];
+                        $email = $row['email'];
+                        $telephone = $row['tele_bricoleur'];
+                        $imgUrl = $row['img_profile'];
+                    } else {
+                        // Handle the case when the bricoleurID does not exist in the database
+                        // For example, display an error message or redirect to an error page
+                        echo "Bricoleur ID not found in the database";
+                        exit;
+                    }
+                ?>
 
 
-                <div class="col-12 py-3 border border-dark bg-white rounded px-5" id="profil">
-                <div class="mb-3 d-flex justify-content-between align-items-center">
+                <div class="px-5 mt-3 d-flex justify-content-between align-items-center">
                     <h3 class="fw-bolder">Mon compte</h3>
                     <a href="edit-profil.php" class="btn fw-bolder hover-yellow" data-bs-toggle="tooltip" data-bs-placement="top" title="Your tooltip message">
-                        <i class="fa-solid fa-pen-to-square fs-2"></i>
+                        <i class="fa-solid fa-pen-to-square fs-4"></i> Modifier
                     </a>
                 </div>
+
                 <hr class="border border-warning border-2 opacity-25">
                 <div class="row flex-column flex-sm-row text-center align-items-center text-sm-start">
                     <div class="col mb-3">
@@ -106,35 +106,30 @@
                         
                     </div>
                 </div>
-                </div>
+            </div>
+        </section>
 
-
-                <div class="col-12 border border-dark bg-white py-3 rounded">
-                    <h2 class="text-center py-3 fw-bolder">Mes projet réalisés</h2>
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4 h-100">
-                                <img src="../images/slide2.jpg" class="img-fluid rounded-start h-100" alt="...">
-                            </div> 
-                            <div class="col-md-8">
-                                <div class="card-body d-flex flex-column justify-content-between h-100">
-                                    <div class="card-title">
-                                        <h2 class="card-title">Titre du projet</h2>
-                                    </div>
-                                    <div class="card-text">
-                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    </div>
-                                    <div class="card-footer text-end">
-                                        <p class="card-text "><small class="text-body-secondary">Dernière mise à jour (date)</small></p>
-                                    </div>
-                                </div>
+        <section class="container my-3 border border-dark bg-white rounded">
+            <div class="px-5 mt-3 d-flex justify-content-between align-items-center">
+                <h3 class="fw-bolder">Mon réalisations</h3>
+                <a href="add-project.php" class="btn fw-bolder hover-yellow align" data-bs-toggle="tooltip" data-bs-placement="top" title="Your tooltip message">
+                    <i class="fa-solid fa-plus fs-4"></i> Ajouter
+                </a>
+            </div>
+            <hr class="border border-warning border-2 opacity-25">
+            <div class="row row-cols-1 row-cols-lg-3 my-5 px-5">
+                <div class="col ">
+                    <div class="card shadow fade show">
+                        <img src="../images/slide2.jpg" class="img-fluid rounded" alt="Card Image">
+                        <div class="card-img-overlay">
+                            <div class="overlay-content d-flex flex-column justify-content-end text-light p-2 h-100">
+                                <h4 class="card-title">Project Title</h4>
+                                <button href="#" class="btn btn-link text-light align-self-end text-decoration-none hover-yellow">Lire La suite -></button>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-            
         </section>
     </main>
 

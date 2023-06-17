@@ -49,15 +49,19 @@ if (!categoriesData) {
 /*******************
  * hide and show the password feild whebe clicking on the checkbox 
  *******************/
-document.getElementByTagName("input").add
-function togglePasswordVisibility() {
-    var passwordField = document.getElementById("passwordField");
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
+  function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("password");
+    var toggleIcon = document.querySelector(".toggle-icon");
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      toggleIcon.innerHTML = '<i class="fas fa-eye-slash"></i>';
     } else {
-        passwordField.type = "password";
+      passwordInput.type = "password";
+      toggleIcon.innerHTML = '<i class="fas fa-eye"></i>';
     }
-}
+  }
+
 /*******************
  * hide and show the password feild whebe clicking on the checkbox 
  *******************/

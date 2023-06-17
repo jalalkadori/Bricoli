@@ -29,3 +29,31 @@ body{
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s, box-shadow 0.3s;
 }
+
+.password-toggle {
+    position: relative;
+}
+.password-toggle input[type="password"] {
+    padding-right: 30px;
+}
+.password-toggle .toggle-icon {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.password-toggle .toggle-icon i {
+    font-size: 20px;
+    color: #ccc;
+}
+
+/* add an animation to card on hover */
+.card {
+    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.card:hover {
+    transform: scale(0.98); 
+
+}

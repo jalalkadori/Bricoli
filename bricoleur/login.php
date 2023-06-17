@@ -15,7 +15,10 @@
   <body>
     <?php
         // in case of password change
-        $passChangeMessage = $_GET['success'];
+        // Check if the 'success' key is set in the $_GET array
+        if (isset($_GET['success'])) {
+            $successMessage = $_GET['success'];
+        }
 
         // Function to verify the entered password against the stored hashed password
         function verifyPassword($password, $hashedPassword) {
@@ -112,15 +115,16 @@
                     <img src="../images/bricoleur/illustrations/login.svg" class="" alt="login illustration" srcset="login illustration">
                 </div>
                 <div class="col-12 col-lg-8">
-                    <?php if (!empty($passChangeMessage)) : ?>
+                    <!-- in case of password change Display the success -->
+                    <?php if (!empty($successMessage)) : ?>
                         <div class="alert alert-success" role="alert">
-                            <?php echo $passChangeMessage; ?>
+                            <?php echo $successMessage; ?>
                         </div>
                     <?php endif; ?>
                     <h2 class="text-center">Accédez à votre compte BRICOLI</h2>
                      
                     <form method="post" action="login.php" class="w-100">
-                        <div class="border border-dark rounded px-2 py-4">
+                        <div class=" px-2">
                             <div class="mb-3">
                                 <label for="email" class="form-label ">Address Email </label>
                                 <input type="email" class="form-control border-dark" name="email">
@@ -132,10 +136,10 @@
                             <?php endif; ?>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Mot de pass</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control border-dark" id="passwordField" name="password" value="">
-                                    <span class="input-group-text border-dark bg-white">
-                                        <input type="checkbox" class="form-check-input border border-dark" onclick="togglePasswordVisibility()">   
+                                <div class="password-toggle">
+                                    <input type="password" class="form-control border-dark" id="password" name="password" value="">
+                                    <span class="toggle-icon" onclick="togglePasswordVisibility()">
+                                        <i class="fas fa-eye"></i>
                                     </span>
                                 </div>
                             </div>
@@ -145,7 +149,7 @@
                                 </div>
                             <?php endif; ?>
                         </div>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end py-2">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a href="./password-reset.php" class="btn text-danger text-start">Mot de pass oublié ?</a>
                             <button type="submit" class="btn btn-dark" name="connecter">Se connecter</button>
                         </div>

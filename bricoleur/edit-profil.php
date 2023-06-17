@@ -301,15 +301,15 @@
                         </div>
                         <div class="col form-group mb-3">
                             <label for="mdp_bricoleur">Mot de passe</label> 
-                            <div class="input-group">
-                                <input type="password" class="form-control  border-black" id="passwordField" name="mdp_bricoleur" value="">
-                                <span class="input-group-text border-dark bg-white">
-                                    <input type="checkbox" class="form-check-input border border-dark" onclick="togglePasswordVisibility()">   
+                            <div class="password-toggle">
+                                <input type="password" class="form-control border-black" id="password" name="mdp_bricoleur" value="">
+                                <span class="toggle-icon" onclick="togglePasswordVisibility()">
+                                    <i class="fas fa-eye"></i>
                                 </span>
                             </div>
                             <?php if (isset($errors['mdp'])) echo '<span class="text-danger">' . $errors['mdp'] . '</span>'; ?>
                         </div>
-                    </div>
+                        </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end py-2">
                         <a href="profil" class="btn btn-danger">Annuler</a>
                         <button type="submit" class="btn btn-dark">Enregistrer les modifications</button>

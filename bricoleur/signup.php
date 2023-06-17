@@ -108,6 +108,16 @@
 
             if (empty($mdp)) {
                 $errors['mdp'] = "Le champ 'Mot de passe' est requis.";
+            } elseif (strlen($mdp) < 8) {
+                $errors['mdp'] = "Le champ 'Mot de passe' doit contenir au moins 8 caractères.";
+            } elseif (!preg_match('/[A-Z]/', $mdp)) {
+                $errors['mdp'] = "Le champ 'Mot de passe' doit contenir au moins une lettre majuscule.";
+            } elseif (!preg_match('/[a-z]/', $mdp)) {
+                $errors['mdp'] = "Le champ 'Mot de passe' doit contenir au moins une lettre minuscule.";
+            } elseif (!preg_match('/\d/', $mdp)) {
+                $errors['mdp'] = "Le champ 'Mot de passe' doit contenir au moins un chiffre.";
+            } elseif (!preg_match('/[^A-Za-z\d]/', $mdp)) {
+                $errors['mdp'] = "Le champ 'Mot de passe' doit contenir au moins un caractère spécial.";
             }
 
             // If there are no validation errors, proceed with inserting the data into the database
@@ -182,7 +192,7 @@
             <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center d-none d-lg-flex">
                 <img src="../images/bricoleur/illustrations/login.svg" class="" alt="login illustration" srcset="login illustration">
             </div> 
-            <div class="col-12 col-lg-8 d-flex flex-column justify-content-center border rounded ">
+            <div class="col-12 col-lg-8 d-flex flex-column justify-content-center ">
                 <h2>Créez votre compte BRICOLI</h2>
                 <hr class="border border-warning border-2 opacity-25">
                 <form method="POST" action="" enctype="multipart/form-data">
@@ -237,14 +247,14 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="mdp_bricoleur">Mot de passe</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control border-black border border-dark" id="passwordField" name="mdp_bricoleur" value="<?php echo isset($_POST['mdp_bricoleur']) ? htmlspecialchars($_POST['mdp_bricoleur']) : ''; ?>">
-                                <?php if (isset($errors['mdp'])) echo '<span class="text-danger">' . $errors['mdp'] . '</span>'; ?>
-                                <span class="input-group-text border-dark bg-white">
-                                    <input type="checkbox" class="form-check-input border border-dark" onclick="togglePasswordVisibility()">   
+                            <div class="password-toggle">
+                                <input type="password" class="form-control border-black border border-dark" id="password" name="mdp_bricoleur" value="<?php echo isset($_POST['mdp_bricoleur']) ? htmlspecialchars($_POST['mdp_bricoleur']) : ''; ?>">
+                                <span class="toggle-icon" onclick="togglePasswordVisibility()">
+                                    <i class="fas fa-eye"></i>
                                 </span>
+                                <?php if (isset($errors['mdp'])) echo '<span class="text-danger">' . $errors['mdp'] . '</span>'; ?>
                             </div>
-                        </div>
+                    </div>
                     </div>
                     <button type="submit" class="btn btn-dark w-100">S'inscrire</button>
                 </form>
@@ -256,9 +266,6 @@
 
     </main>
 
-    <footer class="container-fluid bg-dark">
-        
-    </footer>
     <script src="../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>
