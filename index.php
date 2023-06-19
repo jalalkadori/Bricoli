@@ -9,53 +9,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bricoli</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles/style.css">
     <script src="https://kit.fontawesome.com/75c6b1327b.js" crossorigin="anonymous"></script>
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+ </head>
   <body>
-    <header class="container-fluid">
-        <nav class="navbar navbar-expand-lg bg-body-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="./index.php">
-                    <img src="./logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="150">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse fw-semibold text-uppercase" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#blog">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contactez-Nous</a> 
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Se connecter <i class="fa-solid fa-right-to-bracket"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Bricoleur</a></li>
-                                <li><a class="dropdown-item" href="#">Chercheur</a></li>
-                            </ul>
-                        </li>
-                       
-                    </ul>
-                    
-                </div>
-            </div>
-        </nav>
-    </header>
-
+    
     <main>
-        <section class="container-fluid slide py-5" id="slide">
-            <div class="d-flex flex-column justify-centent-end align-items-center py-5">
-                <h1 class="py-3">Besoin d'aide ?</h1>
-                <h2 class="py-3">Trouvez un bricoleur proche de chez vous</h2>
-                <a href="#services" class="btn btn-light slide-btn">Trouver un bricoleur</a>
+        
+        <section class=" slide" id="slide">
+            <?php
+                // include the header code
+                include("./components/header.php");
+            ?>
+            <div class="d-flex justify-content-center align-items-end slide-components border">
+                <div class=" d-flex flex-column justify-content-end align-items-center text-center border">    
+                    <h1 class="py-3">Besoin d'aide ?</h1>
+                    <h2 class="py-3">Trouvez un bricoleur proche de chez vous</h2>
+                    <a href="#services" class="btn rounded-pill">Trouver un bricoleur</a>
+                </div>
             </div>
         </section>
 
@@ -94,59 +66,9 @@
                 <h3>Je recherche un bricoleur</h3>
                 <h2 class="my-4">Quel type de services recherchez-vous ?</h2>
                 <div class="row row-cols-lg-3 my-3">
-                    <?php
-                    $category = array(
-                        array(
-                                "img" => "peinture.jpg",
-                                "color" => "btn-primary",
-                                "category" => "Peinture"
-                            ),
-                            array(
-                                "img" => "Plomberie.jpg",
-                                "color" => "btn-secondary",
-                                "category" => "Plomberie"
-                            ),
-                            array(
-                                "img" => "Electricité.jpg",
-                                "color" => "btn-danger",
-                                "category" => "Electricité"
-                            ),
-                            array(
-                                "img" => "Carrelage.jpg",
-                                "color" => "btn-success",
-                                "category" => "Carrelage"
-                            ),
-                            array(
-                                "img" => "Electroménager.jpg",
-                                "color" => "btn-warning",
-                                "category" => "Electroménager"
-                            ),
-                            array(
-                                "img" => "Motage de meubles.jpg",
-                                "color" => "btn-dark",
-                                "category" => "Motage de meubles"
-                            )
-                        );
-
-                    for ($x = 0; $x < count($category); $x++) {
-                        $imgSrc = $category[$x]['img'];
-                        $buttonColor = $category[$x]['color'];
-                        $categoryName = $category[$x]['category'];
-                    
-                        echo '
-                            <div class="col mb-3 d-flex justify-content-center">
-                                <div class="card card3 border-0 card-hover-scale">
-                                    <div class="d-flex flex-column align-items-center gap-4">
-                                        <img src="./images/' . $imgSrc . '" class="card-img-top" alt="Image">
-                                    </div>
-                                    <div class="overlay">
-                                        <button class="btn ' . $buttonColor . '">' . $categoryName . '</button>
-                                    </div>
-                                </div>
-                            </div>
-                        ';
-                    }
-                    ?>
+                    <!-- include the code for the hiring procedure section  -->
+                    <?php include_once "./components/services.php"; ?>
+                    <!-- with the include_once statement, the code will be included only one time even if the statement is called multiple times -->
                 </div>
             </div>
         </section>
@@ -156,42 +78,8 @@
                 <h3>Comment ça marche ?</h3>
                 <h2 class="my-4">Pour tous vos petits travaux, il y a BRICOLI</h2>
                 <div class="row row-cols-lg-4 my-5">
-                <?php
-                    $procedure = [
-                        [
-                            "text" => "Sélectionnez votre besoin parmi les catégories",
-                            "imgUrl" => "list.svg"
-                        ],
-                        [
-                            "text" => "Découvrez les profils des différents Bricoco de votre périmètre",
-                            "imgUrl" => "profiling.svg"
-                        ],
-                        [
-                            "text" => "Nous vous mettons en contact avec votre Bricoco préféré",
-                            "imgUrl" => "messaging.svg"
-                        ],
-                        [
-                            "text" => "Une fois le travail réalisé, vous payez le Bricoco directement, sans frais supplémentaires",
-                            "imgUrl" => "payment.png"
-                        ]
-                    ];
-
-                    foreach ($procedure as $item) {
-                        $text = $item['text'];
-                        $imgUrl = $item['imgUrl'];
-                        ?>
-                        <div class="col mb-3">
-                            <div class="card border-0 bg-transparent">
-                                <div class="card-body d-flex flex-column align-items-center gap-4">
-                                    <img src="./images/procedure/<?= $imgUrl ?>" class="card-img-top" alt="...">
-                                    <p class="card-title"><?= $text ?></p>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                ?>
-
+                    <!-- include the code for the hiring procedure section  -->
+                    <?php include_once "./components/procedure.php"; ?>
                 </div>
             </div>
         </section>
@@ -202,46 +90,15 @@
                 <h2 class="text-warning fs-1 fw-bold my-4">Passionné ou professionnel,</h2>
                 <h2>rejoignez le réseau <span class="text-warning fw-bold fs-1">Bricoli</span>  et arrondissez vos fins de mois</h2>
                 <div class="row row-cols-lg-3 my-5">
-                <?php
-                    $bricoProcedure = [
-                        [
-                            "text" => "Complétez votre profil bricoli en quelques clics, fixez un tarif à l’heure",
-                            "imgUrl" => "profil.svg"
-                        ],  
-                        [
-                            "text" => "Un particulier proche de chez vous vous contacte pour une mission",
-                            "imgUrl" => "messaging.svg"
-                        ],
-                        [
-                            "text" => "Une fois la tâche accomplie, vous êtes payé en direct !",
-                            "imgUrl" => "payement.svg"
-                        ],
-                    ];
-
-                    foreach ($bricoProcedure as $item) {
-                        $text = $item['text'];
-                        $imgUrl = $item['imgUrl'];
-                        ?>
-                        <div class="col mb-3">
-                            <div class="card border-0">
-                                <div class="card-body d-flex flex-column align-items-center gap-4">
-                                    <img src="./images/bricoprocedure/<?= $imgUrl ?>" class="card-img-top w-50" alt="...">
-                                    <p class="card-title"><?= $text ?></p>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                ?>
-
+                    <!-- include the code for the brico procedure section  -->
+                    <?php include_once "./components/bricoProcedure.php"; ?>
                 </div>
-                <button class="btn btn-dark">Je m'inscrit</button>
+                <a href="./bricoleur/signup.php" class="btn btn-dark rounded-pill">Je m'inscrit</a>
             </div>
         </section>
 
         <section class="container-fluid py-5" id="blog">
             <div class="container">
-
                 <div class="image-heading">
                     <h2 class="fs-1 fw-bold">BRICO</h2>
                     <img src="./images/blog/blog.png" alt="Description of the image" width="100" height="" class="svg-image">
@@ -292,45 +149,10 @@
         </section>
 
        
-    </main>
+    </main> 
 
-    <footer class="container-fluid bg-dark py-5">
-        <div class="container">
-                <a class="navbar-brand" href="./index.php">
-                    <img src="./logo/BRICO-WHITE.png" alt="bricoli logo" srcset="bricoli logo" width="200">
-                </a>
-            <h5 class="text-warning py-3">Trouver un Bricoleur à :</h5>
-                <div class="row row-cols-lg-3">
-                    <div class="col">
-                        <p class="text-light">Casablanca</p>
-                        <p class="text-light">Tanger</p>
-                        <p class="text-light">Fes</p>
-                        <p class="text-light">Merrakech</p>
-                    </div>
-                    <div class="col">
-                        <p class="text-light">Rabat</p>
-                        <p class="text-light">Oujda</p>
-                    </div>
-                </div>
-
-                <div class="row row-cols-lg-3">
-                    <div class="col">
-                        <h5 class="text-warning py-3">Nous contacter</h5>
-                        <p class="text-light">Nous écrire un mot</p>
-                    </div>
-                    <div class="col">
-                        <h5 class="text-warning py-3">À propos:</h5>
-                        <p class="text-light">Notre philosophie</p>
-                        <p class="text-light">CGU & CGV</p>
-                    </div>
-                    <div class="col">
-                        <h5 class="text-warning py-3">Utiliser Bricoli</h5>
-                        <p class="text-light">Devenir Bricocoleur</p>
-                        <p class="text-light">Travaux entre particuliers</p>
-                    </div>
-                </div>
-        </div>
-    </footer>
+    <!-- include the footer code -->
+    <?php include_once './components/footer.php' ?>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>

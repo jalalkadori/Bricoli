@@ -4,6 +4,9 @@ body{
     background-attachment: fixed;
     background-size: cover;
 }
+.text-yellow {
+    color: #FFCB09;
+}
 .hover-yellow:hover {
     color: #FFCB09;
     cursor: pointer;
@@ -48,12 +51,45 @@ body{
     color: #ccc;
 }
 
-/* add an animation to card on hover */
-.card {
-    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+#projet .card {
+    height: 450px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#realisation .card {
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#realisation .card .project-title{
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
 }
 
-.card:hover {
+#realisation .card {
+    position: relative;
+  }
+
+#realisation .card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+}
+/* add an animation to card on hover */
+#realisation .card {
+    transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#realisation .card:hover {
     transform: scale(0.98); 
 
 }

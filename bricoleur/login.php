@@ -109,6 +109,7 @@
                 </div>
             </nav>
         </header>
+        
         <section class="container center-content rounded-5 container-shadow mt-5 m-md-0 m-lg-0">
             <div class="row py-5 bg-white align-items-center">
                 <div class="col-12 col-lg-4 d-none d-lg-flex">

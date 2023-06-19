@@ -35,34 +35,56 @@ h2{
 
 /* slide section */
 #slide {
+  height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
-  background-image: url(../images/slide2.jpg)
+  background-position: contain;
+  background-image: url(../images/slide3.jpg)
+}
+
+#slide .slide-components{
+  height: 85vh;
 }
 
 #slide h1 {
   color : #FFCB09;
   font-size: 4.5rem;
-  font-weight: 700;
-
+  font-weight: 700; 
 }
 #slide h2 {
   color : #FFF;
   font-size: 3rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
-.slide-btn {
-  border: 2px solid #FFCB09;
+#slide .slide-components a {
+  background-color: #FFCB09;
+  color: #000;
   border-radius: 25px;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  font-weight: 300;
+  padding: 10px 25px;
+  font-size: 1.4rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease-in-out; 
 }
-
+#slide .slide-components a:hover {
+  background-color: #000;
+  color: #FFCB09;
+  cursor: pointer;
+  padding: 10px 30px;
+}
+/* Media query screen under 720px*/
+@media screen and (max-width: 720px) {
+  #slide h1 {
+    font-size: 2.5rem; 
+    /* Adjust the font size for smaller screens */
+  }
+  #slide h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+  
+  }
+}
 /* slide section styling end */
 
 
@@ -131,7 +153,7 @@ h2{
 /* services section styling end */
 
 /* bricoProcedures section styling end */
-#bricoProcedure button {
+#bricoProcedure a {
   border: none;
   border-radius: 25px;
   padding: 5px 25px;
@@ -140,19 +162,19 @@ h2{
   cursor: pointer;
   transition: all 0.3s ease-in-out; 
 }
+#bricoProcedure a {
+  border: none;
+  padding: 10px 25px;
+  font-size: 1.5rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s e  ase-in-out; 
+}
+#bricoProcedure a:hover {
+  color: #FFCB09;
+  padding: 10px 30px;
+}
 
 /* procedures section styling end */
 
 
-/* Media query screen under 720px*/
-@media screen and (max-width: 720px) {
-  #slide h1 {
-    font-size: 1.5rem; 
-    /* Adjust the font size for smaller screens */
-  }
-  #slide h2 {
-    font-size: 1.5rem;
-    font-weight: 400;
-  
-  }
-}

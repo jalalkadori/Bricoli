@@ -17,14 +17,12 @@
   <body>
  
   <?php
-        // Include your database connection code here
 
         // Define the necessary variables
         $titre = "";
         $description = "";
         $image = "";
-        $id_bricoleur = "";
-        $errorMessage = "";
+        $errorMessages = array();
 
         // Check if the form is submitted
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -32,20 +30,38 @@
             $titre = sanitizeInput($_POST['titre']);
             $description = sanitizeInput($_POST['description']);
             $image = $_FILES['image']['name'];
-            $id_bricoleur = sanitizeInput($_POST['id_bricoleur']);
 
             // Validate the input fields
-            if (empty($titre) || empty($description) || empty($image) || empty($id_bricoleur)) {
-                $errorMessage = "Veuillez remplir tous les champs.";
-            } else {
+            if (empty($titre)) {
+                $errorMessages['titre'] = "Veuillez saisir un titre.";
+            }
+            if (empty($description)) {
+                $errorMessages['description'] = "Veuillez saisir une description.";
+            }
+            if (empty($image)) {
+                $errorMessages['image'] = "Veuillez sélectionner une image.";
+            }
+
+
+            if (count($errorMessages) === 0) {
                 // Upload the image file
-                $targetDirectory = "uploads/";
-                $targetFilePath = $targetDirectory . basename($image);
+                $targetDirectory = "../images/bricoleur/realisations/";
+                $imageName = $_FILES['image']['name'];
+                $imageTmpName = $_FILES['image']['tmp_name'];
+
+                // Get the file extension
+                $imageFileType = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
+
+                // Generate a unique ID
+                $uniqueID = uniqid();
+
+                // Create the target file path with the unique ID
+                $targetFilePath = $targetDirectory . $uniqueID . '.' . $imageFileType;
+
                 $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
 
                 // Check if the image file is a valid image
-                $check = getimagesize($_FILES['image']['tmp_name']);
+                $check = getimagesize($imageTmpName);
                 if ($check === false) {
                     $errorMessage = "Le fichier sélectionné n'est pas une image.";
                     $uploadOk = 0;
@@ -57,9 +73,9 @@
                     $uploadOk = 0;
                 }
 
-                // Check file size (limit to 5MB)
-                if ($_FILES['image']['size'] > 5 * 1024 * 1024) {
-                    $errorMessage = "La taille du fichier est trop grande. Veuillez sélectionner un fichier inférieur à 5 Mo.";
+                // Check file size (limit to 2MB)
+                if ($_FILES['image']['size'] > 2 * 1024 * 1024) {
+                    $errorMessage = "La taille du fichier est trop grande. Veuillez sélectionner un fichier inférieur à 2 Mo.";
                     $uploadOk = 0;
                 }
 
@@ -72,17 +88,20 @@
 
                 // If all checks pass, move the file to the target directory
                 if ($uploadOk) {
-                    if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
+                    if (move_uploaded_file($imageTmpName, $targetFilePath)) {
                         // Insert the project details into the database
-                        $stmt = $db_connection->prepare("INSERT INTO realisation (titre_realisation, description_realisation, img_realisation, id_bricoleur) VALUES (:titre, :description, :image, :id_bricoleur)");
+                        $stmt = $db_connection->prepare("INSERT INTO realisations (id_realisation, titre_realisation, description_realisation, img_realisation, id_bricoleur) VALUES (Null, :titre, :description, :image, :id_bricoleur)");
                         $stmt->bindParam(':titre', $titre);
                         $stmt->bindParam(':description', $description);
                         $stmt->bindParam(':image', $targetFilePath);
-                        $stmt->bindParam(':id_bricoleur', $id_bricoleur);
+                        $stmt->bindParam(':id_bricoleur', $Id_bricoleur);
 
                         if ($stmt->execute()) {
                             // Project added successfully
                             $successMessage = "Le projet a été ajouté avec succès.";
+                            // Redirect to the login page with the success message in the URL
+                            header("Location: profil.php?success=" . urlencode($successMessage));
+                            exit;
                         } else {
                             $errorMessage = "Erreur lors de l'ajout du projet. Veuillez réessayer.";
                         }
@@ -142,33 +161,42 @@
     <section class="container center-content border rounded container-shadow my-5 my-md-0 my-lg-0">
         <div class="row bg-white">
             <div class="col-12 col-lg-4 border d-flex justify-content-center align-items-center d-none d-lg-flex">
-                <img src="<" class="w-50 img-fluid rounded-circle" alt="Image de profil" style="margin: 0 auto;">
+                <!-- Existing code for the login illustration -->
             </div>
 
             <div class="col-12 col-lg-8 d-flex flex-column justify-content-center border rounded ">
                 <h2 class="pt-2">Ajouter un nouveau projet</h2>
                 <hr class="border border-warning border-2 opacity-25">
-                
+                <?php if (isset($errorMessage)) { ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo $errorMessage; ?>
+                    </div>
+                <?php } ?>
                 <form method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="titre" class="form-label">Titre :</label>
-                        <input type="text" class="form-control" id="titre" name="titre" value="<?php echo $titre; ?>">
+                        <input type="text" class="form-control rounded-0 border-dark" id="titre" name="titre" value="<?php echo $titre; ?>">
+                        <?php if (isset($errorMessages['titre'])) { ?>
+                            <div class="text-danger"><?php echo $errorMessages['titre']; ?></div>
+                        <?php } ?>
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description :</label>
-                        <textarea class="form-control" id="description" name="description"><?php echo $description; ?></textarea>
+                        <textarea class="form-control rounded-0 border-dark" id="description" name="description"><?php echo $description; ?></textarea>
+                        <?php if (isset($errorMessages['description'])) { ?>
+                            <div class="text-danger"><?php echo $errorMessages['description']; ?></div>
+                        <?php } ?>
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image :</label>
-                        <input type="file" class="form-control" id="image" name="image">
-                    </div>
-                    <div class="mb-3">
-                        <label for="id_bricoleur" class="form-label">ID Bricoleur :</label>
-                        <input type="text" class="form-control" id="id_bricoleur" name="id_bricoleur" value="<?php echo $id_bricoleur; ?>">
+                        <input type="file" class="form-control rounded-0 border-dark" id="image" name="image">
+                        <?php if (isset($errorMessages['image'])) { ?>
+                            <div class="text-danger"><?php echo $errorMessages['image']; ?></div>
+                        <?php } ?>
                     </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end py-2">
-                        <a href="profil" class="btn btn-danger">Annuler</a>
-                        <button type="submit" class="btn btn-primary">Ajouter le projet</button>
+                        <a href="profil" class="btn btn-danger rounded-0">Annuler</a>
+                        <button type="submit" class="btn btn-success rounded-0">Ajouter le projet</button>
                     </div>
                 </form>
             </div>

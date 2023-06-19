@@ -2,7 +2,6 @@
     include("../db_connection.php");
     include("./session-config.php");
     $Id_bricoleur = $_SESSION['bricoleurID'];
-    
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,6 +26,9 @@
                 </button>
                 <div class="collapse navbar-collapse fw-semibold text-uppercase" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.php">Home</a> 
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contacte">Contactez-Nous</a> 
                         </li>
@@ -59,6 +61,12 @@
         <section class="container my-3 border border-dark bg-white rounded" id="profil">
             <div class="container ">
                 <?php
+
+                    // Check if the 'success' key is set in the $_GET array
+                    if (isset($_GET['success'])) {
+                        $successMessage = $_GET['success'];
+                    }
+
                     $stmt = $db_connection->prepare("SELECT * FROM `bricoleur` WHERE id_bricoleur = ?");
                     $stmt->execute([$Id_bricoleur]);
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -73,6 +81,7 @@
                         $email = $row['email'];
                         $telephone = $row['tele_bricoleur'];
                         $imgUrl = $row['img_profile'];
+                        $speciality = $row['speciality'];
                     } else {
                         // Handle the case when the bricoleurID does not exist in the database
                         // For example, display an error message or redirect to an error page
@@ -90,6 +99,7 @@
                 </div>
 
                 <hr class="border border-warning border-2 opacity-25">
+                
                 <div class="row flex-column flex-sm-row text-center align-items-center text-sm-start">
                     <div class="col mb-3">
                         <img src="<?php echo $imgUrl; ?>" class="w-50 rounded-circle" width="100">
@@ -109,26 +119,70 @@
             </div>
         </section>
 
-        <section class="container my-3 border border-dark bg-white rounded">
+        <section class="container my-3 border border-dark bg-white rounded" id="realisation">
             <div class="px-5 mt-3 d-flex justify-content-between align-items-center">
-                <h3 class="fw-bolder">Mon réalisations</h3>
+                <h3 class="fw-bolder">Mes réalisations</h3>
                 <a href="add-project.php" class="btn fw-bolder hover-yellow align" data-bs-toggle="tooltip" data-bs-placement="top" title="Your tooltip message">
                     <i class="fa-solid fa-plus fs-4"></i> Ajouter
                 </a>
             </div>
             <hr class="border border-warning border-2 opacity-25">
-            <div class="row row-cols-1 row-cols-lg-3 my-5 px-5">
-                <div class="col ">
-                    <div class="card shadow fade show">
-                        <img src="../images/slide2.jpg" class="img-fluid rounded" alt="Card Image">
-                        <div class="card-img-overlay">
-                            <div class="overlay-content d-flex flex-column justify-content-end text-light p-2 h-100">
-                                <h4 class="card-title">Project Title</h4>
-                                <button href="#" class="btn btn-link text-light align-self-end text-decoration-none hover-yellow">Lire La suite -></button>
-                            </div>
-                        </div>
-                    </div>
+
+            <!-- in case of an added project Display the success -->
+            <?php if (!empty($successMessage)) : ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $successMessage; ?>
                 </div>
+            <?php endif; ?>
+
+            <div class="row row-cols-1 row-cols-lg-3 my-5">
+                <?php
+                    $stmt = $db_connection->prepare("SELECT * FROM `realisations` WHERE id_bricoleur = ?");
+                    $stmt->execute([$Id_bricoleur]);
+                    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    // Check if there are any projects for the given bricoleur ID
+                    if ($rows) {
+                        foreach ($rows as $row) {
+                            // Extract the values from the fetched row
+                            $projectId = $row['id_realisation'];
+                            $titre = $row['titre_realisation'];
+                            $description = $row['description_realisation'];
+                            $imgUrl = $row['img_realisation'];;
+                            $date_realisation = date("d F Y", strtotime($row['date_realisation'])); // Format the date as "day month year"
+                            
+                            echo '
+                                <div class="col mb-3">
+                                    <div class="card shadow" style="background-image: url(\'' . $imgUrl . '\');">
+                                        <div class="card-img-overlay">
+                                            <div class="overlay-content d-flex flex-column justify-content-between text-light h-100">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <small><i class="fa-solid fa-star text-yellow"></i> 4,5</small>
+                                                    <button class="btn btn-warning rounded-0">' . $speciality . '</button>
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-between project-title p-2">
+                                                    <h4 class="card-title">' . $titre . '</h4>
+                                                    <div class="d-flex justify-content-between align-items-center bg-dark px-2">
+                                                        <small class="text-white">Publié le ' . $date_realisation . '</small>
+                                                        <a href="project?id=' . $projectId . '&title=' . urlencode($titre) . '" class="btn btn-link text-light text-decoration-none hover-yellow">
+                                                            <small>Lire La suite -></small>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ';
+
+                        }
+                    } else {
+                        // Handle the case when there are no projects for the given bricoleur ID
+                        // For example, display an error message or redirect to an error page
+                        echo "Aucune réalisation trouvée";
+                        exit;
+                    }
+                ?>
             </div>
         </section>
     </main>
