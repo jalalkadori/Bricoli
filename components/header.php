@@ -1,6 +1,6 @@
 <?php
     echo '
-        <header class="container-fluid sticky-top bg-light">
+        <header class="container-fluid sticky-top bg-white">
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="./index.php">
