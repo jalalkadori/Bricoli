@@ -21,6 +21,14 @@
             $input = trim($input);
             return $input;
         }
+        // Fetch the cities from the JSON file
+        $villeData = file_get_contents('../json/ville.json');
+        $villes = json_decode($villeData, true);
+
+        // Fetch the categoryData from the JSON file
+        $categoryData = file_get_contents('../json/category.json');
+        $categories = json_decode($categoryData, true);
+
         // Initialize an array to store validation errors
         $errors = [];
 
@@ -35,6 +43,7 @@
             $ville = sanitizeInput($_POST['ville_bricoleur']);
             $imgProfile = $_FILES['img_profile'];
             $email = sanitizeInput($_POST['email']);
+            $speciality = sanitizeInput($_POST['speciality']);
             $mdp = sanitizeInput($_POST['mdp_bricoleur']);
 
             // Perform your validation checks on the input data
@@ -48,8 +57,8 @@
 
             if (empty($telephone)) {
                 $errors['telephone'] = "Le champ 'Téléphone' est requis.";
-            } elseif (!preg_match('/^\d{10}$/', $telephone)) {
-                $errors['telephone'] = "Le champ 'Téléphone' doit contenir 10 chiffres.";
+            } elseif (!preg_match('/^(06|07|08)\d{8}$/', $telephone)) {
+                $errors['telephone'] = "Le champ 'Téléphone' doit commencer par 06, 07 ou 08 et contenir 10 chiffres au total.";
             }
 
             if (empty($cin)) {
@@ -100,6 +109,20 @@
                 $errors['img_profile'] = 'Veuillez choisir votre image de profil.';
             }
 
+            if (empty($speciality)) {
+                $errors['speciality'] = "Veuillez choisir votre Specialité.";
+            } 
+            // email validation : 
+            // Check if the email already exists in the database
+            $stmt = $db_connection->prepare("SELECT COUNT(*) FROM bricoleur WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            $count = $stmt->fetchColumn();
+
+            if ($count > 0) {
+                $errors['email'] = "L'adresse email est déjà utilisée.";
+            }
+
             if (empty($email)) {
                 $errors['email'] = "Le champ 'Email' est requis.";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -131,7 +154,7 @@
                     // Hash the password
                     $hashedPassword = password_hash($mdp, PASSWORD_DEFAULT);
                     // Prepare the INSERT statement
-                    $stmt = $db_connection->prepare("INSERT INTO bricoleur (id_bricoleur, nom_bricoleur, prenom_bricoleur, tele_bricoleur, cin_bricoleur, adresse_bricoleur, ville_bricoleur, img_profile, email, mdp_bricoleur, id_admin) VALUES (NULL, :nom, :prenom, :telephone, :cin, :adresse, :ville, :img_profile, :email, :mdp, 1)");
+                    $stmt = $db_connection->prepare("INSERT INTO bricoleur (id_bricoleur, nom_bricoleur, prenom_bricoleur, tele_bricoleur, cin_bricoleur, adresse_bricoleur, ville_bricoleur, img_profile, speciality, email, mdp_bricoleur, id_admin) VALUES (NULL, :nom, :prenom, :telephone, :cin, :adresse, :ville, :img_profile, :speciality, :email, :mdp, 1)");
 
                     // Bind the parameters
                     $stmt->bindParam(':nom', $nom);
@@ -141,6 +164,7 @@
                     $stmt->bindParam(':adresse', $adresse);
                     $stmt->bindParam(':ville', $ville);
                     $stmt->bindParam(':img_profile', $targetPath);
+                    $stmt->bindParam(':speciality', $speciality);
                     $stmt->bindParam(':email', $email);
                     $stmt->bindParam(':mdp', $hashedPassword);
 
@@ -196,7 +220,7 @@
                 <h2>Créez votre compte BRICOLI</h2>
                 <hr class="border border-warning border-2 opacity-25">
                 <form method="POST" action="" enctype="multipart/form-data">
-                    <div class="row row-cols-1 row-cols-md-3">
+                    <div class="row row-cols-1 row-cols-md-4">
                         <div class="form-group mb-3">
                             <label for="nom_bricoleur">Nom</label>
                             <input type="text" class="form-control border-black" id="nom_bricoleur" name="nom_bricoleur" value="<?php echo isset($_POST['nom_bricoleur']) ? htmlspecialchars($_POST['nom_bricoleur']) : ''; ?>">
@@ -225,6 +249,8 @@
                             <input type="text" class="form-control border-black" id="cin_bricoleur" name="cin_bricoleur" value="<?php echo isset($_POST['cin_bricoleur']) ? htmlspecialchars($_POST['cin_bricoleur']) : ''; ?>">
                             <?php if (isset($errors['cin'])) echo '<span class="text-danger">' . $errors['cin'] . '</span>'; ?>
                         </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-3">
                         <div class="form-group mb-3">
                             <label for="adresse_bricoleur">Adresse</label>
                             <input type="text" class="form-control border-black" id="adresse_bricoleur" name="adresse_bricoleur" value="<?php echo isset($_POST['adresse_bricoleur']) ? htmlspecialchars($_POST['adresse_bricoleur']) : ''; ?>">
@@ -232,13 +258,34 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="ville_bricoleur">Ville</label>
-                            <input type="text" class="form-control border-black" id="ville_bricoleur" name="ville_bricoleur" value="<?php echo isset($_POST['ville_bricoleur']) ? htmlspecialchars($_POST['ville_bricoleur']) : ''; ?>">
+                            <select name="ville_bricoleur" id="ville_bricoleur" class="form-select rounded-0 border border-dark">
+                                <option>Choisir votre ville</option>
+                                <!-- create options (ville) for the select input based on the json file -->
+                                <?php foreach ($villes as $ville) : ?>
+                                    <option value="<?php echo $ville['ville']; ?>" <?php echo (isset($_POST['ville_bricoleur']) == $ville['ville']) ? 'selected' : ''; ?>>
+                                        <?php echo $ville['ville']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                             <?php if (isset($errors['ville'])) echo '<span class="text-danger">' . $errors['ville'] . '</span>'; ?>
                         </div>
                         <div class="form-group mb-3">
                             <label for="img_profile">Image de profil</label>
                             <input type="file" class="form-control border-black" id="img_profile" name="img_profile">
                             <?php if (isset($errors['img_profile'])) echo '<span class="text-danger">' . $errors['img_profile'] . '</span>'; ?>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="speciality">Specialité</label>
+                            <select name="speciality" id="categorie" class="form-select rounded-0 border border-dark">
+                            <option>Choisir votre specialité</option>
+                                <!-- create options (category) for the select input based on the json file -->
+                                <?php foreach ($categories as $categorie) : ?>
+                                    <option value="<?php echo $categorie['category']; ?>" <?php echo (isset($_POST['speciality']) == $categorie['category']) ? 'selected' : ''; ?>>
+                                        <?php echo $categorie['category']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <?php if (isset($errors['speciality'])) echo '<span class="text-danger">' . $errors['speciality'] . '</span>'; ?>
                         </div>
                         <div class="form-group mb-3">
                             <label for="email">Email</label>
@@ -254,7 +301,7 @@
                                 </span>
                                 <?php if (isset($errors['mdp'])) echo '<span class="text-danger">' . $errors['mdp'] . '</span>'; ?>
                             </div>
-                    </div>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-dark w-100">S'inscrire</button>
                 </form>

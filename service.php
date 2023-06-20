@@ -1,3 +1,15 @@
+<?php
+// Retrieve the category variable from the URL
+if (isset($_GET['category'])) {
+    $category = $_GET['category'];
+    
+    // Use the category variable in your code
+    // ...
+    
+    echo "Selected category: " . $category;
+}
+?>
+
 <?php 
     include("./db_connection.php");
     session_start();

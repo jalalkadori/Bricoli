@@ -1,0 +1,269 @@
+Last Name: Hassan
+First Name: Ahmed
+Phone Number: 1234567890
+CIN Number: AB123456
+Address: Omar Ibn Al-Khattab Street, Casablanca
+City: Casablanca
+Email: ahmed.hassan@example.com
+Password: P@ssw0rd
+
+Last Name: Khalid
+First Name: Youssef
+Phone Number: 9876543210
+CIN Number: CD654321
+Address: Al-Maghrib Street, Tangier
+City: Tangier
+Email: youssef.khalid@example.com
+Password: Passw0rd123
+
+Last Name: Abidi
+First Name: Karim
+Phone Number: 5551234567
+CIN Number: EF789012
+Address: Ibn Battuta Avenue, Marrakech
+City: Marrakech
+Email: karim.abidi@example.com
+Password: Welcome2021!
+
+Last Name: Faraj
+First Name: Hamza
+Phone Number: 9876543210
+CIN Number: GH345678
+Address: Al-Madinah Street, Fes
+City: Fes
+Email: hamza.faraj@example.com
+Password: SecurePass1!
+
+Last Name: Saidi
+First Name: Mohammed
+Phone Number: 5559876543
+CIN Number: IJ901234
+Address: Al-Jazair Street, Rabat
+City: Rabat
+Email: mohammed.saidi@example.com
+Password: StrongPassword23
+
+Last Name: Alawi
+First Name: Ibrahim
+Phone Number: 1234567890
+CIN Number: KL567890
+Address: Abdullah Al-Ghafiqi Street, Agadir
+City: Agadir
+Email: ibrahim.alawi@example.com
+Password: Passw0rd!23
+
+Last Name: Hakimi
+First Name: Hassan
+Phone Number: 9876543210
+CIN Number: MN678901
+Address: Al-Mouahidine Street, Meknes
+City: Meknes
+Email: hassan.hakimi@example.com
+Password: Secure123!
+
+Last Name: Mansour
+First Name: Jamal
+Phone Number: 5551234567
+CIN Number: OP789012
+Address: Al-Andalus Street, Tetouan
+City: Tetouan
+Email: jamal.mansour@example.com
+Password: Strong@123
+
+Last Name: Sadiq
+First Name: Nabil
+Phone Number: 9876543210
+CIN Number: QR890123
+Address: Mohammed V Avenue, Oujda
+City: Oujda
+Email: nabil.sadiq@example.com
+Password: P@ssword123
+
+Last Name: Rahimi
+First Name: Mustafa
+Phone Number: 5559876543
+CIN Number: ST901234
+Address: Al-Maghreb Al-Arabi Street, Safi
+City: Safi
+Email: mustafa.rahimi@example.com
+Password: Password123!
+
+Last Name: Mahmoud
+First Name: Tariq
+Phone Number: 1234567890
+CIN Number: UV123456
+Address: Al-Quds Street, Casablanca
+City: Casablanca
+Email: tariq.mahmoud@example.com
+Password: SecurePass!123
+
+Last Name: Saidi
+First Name: Khalid
+Phone Number: 9876543210
+CIN Number: WX234567
+Address: Hassan II Avenue, Fes
+City: Fes
+Email: khalid.saidi@example.com
+Password: Passw0rd123@
+
+Last Name: Hamidi
+First Name: Ahmed
+Phone Number: 5551234567
+CIN Number: YZ345678
+Address: Al-Maghrib Al-Faransi Street, Marrakech
+City: Marrakech
+Email: ahmed.hamidi@example.com
+Password: StrongPassword!1
+
+Last Name: Qasimi
+First Name: Youssef
+Phone Number: 9876543210
+CIN Number: AB456789
+Address: Ibn Battuta Street, Rabat
+City: Rabat
+Email: youssef.qasimi@example.com
+Password: P@ssword321
+
+Last Name: Abidi
+First Name: Ali
+Phone Number: 5559876543
+CIN Number: CD567890
+Address: Al-Maslaha Street, Tangier
+City: Tangier
+Email: ali.abidi@example.com
+Password: Password123!
+
+Last Name: Al-Mansouri
+First Name: Hassan
+Phone Number: 5551234567
+CIN Number: EF678901
+Address: Al-Farouq Street, Agadir
+City: Agadir
+Email: hassan.almansouri@example.com
+Password: SecurePass123!
+
+Last Name: Al-Hakim
+First Name: Omar
+Phone Number: 9876543210
+CIN Number: GH789012
+Address: Al-Madinah Street, Oujda
+City: Oujda
+Email: omar.alhakim@example.com
+Password: P@ssword321!
+
+Last Name: Al-Ahmadi
+First Name: Abdullah
+Phone Number: 5559876543
+CIN Number: IJ901234
+Address: Al-Razi Street, Tetouan
+City: Tetouan
+Email: abdullah.alahmadi@example.com
+Password: StrongPass123@
+
+Last Name: Al-Saleh
+First Name: Khalil
+Phone Number: 5551234567
+CIN Number: KL012345
+Address: Al-Azhar Street, Meknes
+City: Meknes
+Email: khalil.alsaleh@example.com
+Password: Password!123
+
+Last Name: Al-Qadir
+First Name: Yasin
+Phone Number: 9876543210
+CIN Number: MN123456
+Address: Al-Zahra Street, Safi
+City: Safi
+Email: yasin.alqadir@example.com
+Password: Passw0rd123!
+
+Last Name: Al-Abdullah
+First Name: Faisal
+Phone Number: 5551234567
+CIN Number: OP345678
+Address: Al-Riyadh Street, Rabat
+City: Rabat
+Email: faisal.alabdullah@example.com
+Password: P@ssw0rd123!
+
+Last Name: Al-Masri
+First Name: Tarek
+Phone Number: 9876543210
+CIN Number: QR567890
+Address: Al-Hayyam Street, Casablanca
+City: Casablanca
+Email: tarek.almasri@example.com
+Password: Secur3Pass!
+
+Last Name: Al-Haddad
+First Name: Ibrahim
+Phone Number: 5559876543
+CIN Number: ST678901
+Address: Al-Ameen Street, Marrakech
+City: Marrakech
+Email: ibrahim.alhaddad@example.com
+Password: StrongPassword123#
+
+Last Name: Al-Saadi
+First Name: Khalid
+Phone Number: 5551234567
+CIN Number: UV789012
+Address: Al-Fateh Street, Tangier
+City: Tangier
+Email: khalid.alsaadi@example.com
+Password: Passw0rd#@123
+
+Last Name: Al-Hamdi
+First Name: Ziad
+Phone Number: 9876543210
+CIN Number: WX901234
+Address: Al-Karam Street, Fes
+City: Fes
+Email: ziad.alhamdi@example.com
+Password: P@ss123word!
+
+Last Name: Al-Qasimi
+First Name: Saad
+Phone Number: 5551234567
+CIN Number: YZ012345
+Address: Al-Quds Street, Essaouira
+City: Essaouira
+Email: saad.alqasimi@example.com
+Password: Password!321
+
+Last Name: Al-Khatib
+First Name: Amir
+Phone Number: 5559876543
+CIN Number: 123456AB
+Address: Al-Wahid Street, Agadir
+City: Agadir
+Email: amir.alkhatib@example.com
+Password: S3cureP@ss
+
+Last Name: Al-Attar
+First Name: Ahmed
+Phone Number: 9876543210
+CIN Number: 456789CD
+Address: Al-Nasr Street, Oujda
+City: Oujda
+Email: ahmed.alattar@example.com
+Password: P@ssword123
+
+Last Name: Al-Maliki
+First Name: Abdulaziz
+Phone Number: 5551234567
+CIN Number: EF012345
+Address: Al-Huda Street, Tetouan
+City: Tetouan
+Email: abdulaziz.almaliki@example.com
+Password: Secur3Pass!
+
+Last Name: Al-Darwish
+First Name: Raed
+Phone Number: 5559876543
+CIN Number: GH456789
+Address: Al-Fajr Street, Meknes
+City: Meknes
+Email: raed.aldarwish@example.com
+Password: Passw0rd!456

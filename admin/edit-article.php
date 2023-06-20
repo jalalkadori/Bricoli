@@ -1,7 +1,6 @@
 <?php 
     include("../db_connection.php");
     include("session-config.php");
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -171,9 +170,11 @@
                 <div class="mb-3">
                     <label for="categorie" class="form-label">Categorie d'article :</label>
                     <select name="categorie" id="categorie" class="form-select rounded-0 border border-dark" required>
-                        <option selected>Choisire une categorie</option>
+                        <!-- create options for the select element based on the categories in the JSON file, whene the category matches the category of the article, print the selected attribute -->
                         <?php foreach ($categories as $category) : ?>
-                            <option value="<?php echo $category['category']; ?>" <?php echo ($category['category'] == $categorieOld) ? 'selected' : ''; ?>><?php echo $category['category']; ?></option>
+                            <option value="<?php echo $category['category']; ?>" <?php echo ($category['category'] == $categorieOld) ? 'selected' : ''; ?>>
+                                <?php echo $category['category']; ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -188,9 +189,6 @@
                 <button type="submit" class="btn btn-dark rounded-0 w-100">Save Changes</button>
             </form>
         </section>
-
-
-        
 
     </main>
     

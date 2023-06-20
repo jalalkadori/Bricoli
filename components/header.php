@@ -21,7 +21,7 @@
                         <ul class="navbar-nav mb-2 mb-lg-0">
     ';
 
-    // Check if the user is logged in and the email is set in the session variable
+    // Check if bricoleur is logged in and the email is set in the session variable
     if (isset($_SESSION['bricoleurEmail'])) {
         echo '
             <li class="nav-item dropdown">
@@ -34,6 +34,19 @@
                 </ul>
             </li>
         ';
+    } 
+    // Check if bricoleur is logged in and the email is set in the session variable
+    elseif (isset($_SESSION['chrcheurEmail'])) {
+        echo '
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    '.$_SESSION['chrcheurNom']. ' ' .$_SESSION['chrcheurPrenom'].' <i class="fa-sharp fa-solid fa-user fa-sm ml-2"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="./chercheur/logout">Déconnexion</a></li>
+                </ul>
+            </li>
+        ';
     } else {
         echo '
             <li class="nav-item dropdown">
@@ -42,7 +55,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="bricoleur/login">Bricoleur</a></li>
-                    <li><a class="dropdown-item" href="#">Chercheur</a></li>
+                    <li><a class="dropdown-item" href="chercheur/login">Chercheur</a></li>
                 </ul>
             </li>
         ';

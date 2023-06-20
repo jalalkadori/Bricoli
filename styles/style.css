@@ -35,15 +35,16 @@ h2{
 
 /* slide section */
 #slide {
-  height: 100vh;
+  height: 600px !important;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: contain;
-  background-image: url(../images/slide3.jpg)
+  background-image: url(../images/slide3.jpg);
+  overflow: hidden;
 }
 
 #slide .slide-components{
-  height: 85vh;
+  height: 500px;
 }
 
 #slide h1 {

@@ -90,10 +90,7 @@
                     echo '
                         <div class="card rounded-0" style="background-image: url(\'' . $imgUrl . '\');"></div>
                         <div class="d-flex justify-content-between align-items-center bg-dark px-2">
-                            <small class="text-white">Publié le ' . $date_realisation . '</small>
-                            <a href="#" class="btn btn-link text-light text-decoration-none hover-yellow">
-                                <small>Lire La suite -></small>
-                            </a>
+                            <small class="text-white py-2">Publié le ' . $date_realisation . '</small>
                         </div>
                         <p class="my-3">' . $description . '</p>
                         <a href="profil" class="btn btn-outline-dark"><i class="fa-solid fa-arrow-left"></i> Retour</a>

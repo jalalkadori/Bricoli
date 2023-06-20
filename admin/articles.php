@@ -100,7 +100,7 @@
                                     $imgUrl = $article['img_url'];
                                     $category = $article['categorie_acticle'];
                                     $title = $article['titre_article'];
-                                    $updatedAt = date("d F Y", strtotime($article['date_publication'])); // Format the date as "day month year"
+                                    $updateDate = date("d F Y", strtotime($article['date_publication'])); // Format the date as "day month year"
                                     $articleContent = $article['corp_article'];
 
                                     // HTML code for displaying the article details
@@ -109,7 +109,7 @@
                                     echo '    <div class="card-body">';
                                     echo '        <h5 class="card-title">' . $title . '</h5>';
                                     echo '        <p class="card-text">' . $articleContent . '</p>';
-                                    echo '        <p class="card-text">Dernière mise à jour : ' . $updatedAt . '</p>';
+                                    echo '        <p class="card-text">Dernière mise à jour : ' . $updateDate . '</p>';
                                     echo '        <a href="blog" class="btn btn-outline-dark"><i class="fa-solid fa-arrow-left"></i> Retour</a>';
                                     echo '    </div>';
                                     echo '</div>';
