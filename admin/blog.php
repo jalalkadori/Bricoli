@@ -92,7 +92,7 @@
                 </div>
             <?php endif; ?>
 
-            <div class="row row-cols-1 row-cols-xl-2 text-center">
+            <div class="row row-cols-1 row-cols-lg-3 text-center">
             <?php
                 // Fetch articles from the database
                 $stmt = $db_connection->prepare("SELECT * FROM article");
@@ -122,7 +122,7 @@
 
                     // HTML code for displaying the article
                     echo '<div class="col mb-2">';
-                    echo '        <div class="card border-0 text-white rounded h-100 ">';
+                    echo '        <div class="card border-0 text-white rounded h-100">';
                     echo '            <img class="card-img img-fluid h-100" src="' . $imgUrl . '" alt="Article image">';
                     echo '            <div class="card-img-overlay d-flex flex-column justify-content-end align-items-end p-0">';
                     echo '                <div class="text-end w-100">';

@@ -3,7 +3,7 @@
     <footer class="container-fluid bg-dark py-5">
         <div class="container">
                 <a class="navbar-brand" href="./index.php">
-                    <img src="./logo/BRICO-WHITE.png" alt="bricoli logo" srcset="bricoli logo" width="200">
+                    <img src="./logo/BRICO-WHITE" alt="bricoli logo" srcset="bricoli logo" width="200">
                 </a>
             <h5 class="text-warning py-3">Trouver un Bricoleur à :</h5>
                 <div class="row row-cols-lg-3">

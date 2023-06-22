@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/admin-style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://kit.fontawesome.com/75c6b1327b.js" crossorigin="anonymous"></script>
   </head>
   <body class="bg-pan-right">
@@ -78,6 +79,16 @@
                     // Get the article count from the result
                     $articleCount = $result['articleCount'];       
                 ?>
+                <?php
+                    // Prepare the SQL statement to count the number of articles
+                    $stmt = $db_connection->prepare("SELECT COUNT(*) AS bricoleurCount FROM bricoleur");
+                    // Execute the query
+                    $stmt->execute();
+                    // Fetch the result
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    // Get the article count from the result
+                    $bricoleurCount = $result['bricoleurCount'];       
+                ?>
                 <div class="col-12 my-2">
                     <div class="card py-2 h-100">
                         <div class="card-body">
@@ -91,7 +102,6 @@
                                 </div>
                                 <div class="col-4 d-flex justify-content-end align-items-center">
                                     <h2 class="fs-1"><?php echo $articleCount;?> <i class="fa-solid fa-arrow-trend-up"></i></h2>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -103,14 +113,14 @@
                         <div class="card-body h-100">
                             <div class="row align-items-center">
                                 <div class="col-2 text-center">
-                                    <i class="fa-solid fa-newspaper articleIcon"></i>
+                                <i class="fa-solid fa-list articleIcon"></i>
                                 </div>
                                 <div class="col-6 text-start">
                                     <h5 class="fs-2">Bricoleurs</h5>
                                     <h6>Bricoleurs inscrits</h6>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <h2 class="fs-1">124</h2>
+                                    <h2 class="fs-1"><?php echo $bricoleurCount;?> <span class="material-symbols-outlined"> person_apron</span></h2>
                                 </div>
                             </div>
                         </div>
@@ -122,14 +132,14 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-2 text-center">
-                                    <i class="fa-solid fa-newspaper articleIcon"></i>
+                                <i class="fa-solid fa-address-card articleIcon"></i>
                                 </div>
                                 <div class="col-6 text-start">
                                     <h5 class="fs-2">Inscriptions</h5>
                                     <h6>Inscriptions en attente de validation</h6>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <h2 class="fs-1">124</h2>
+                                    <h2 class="fs-1">0</h2>
                                 </div>
                             </div>
                         </div>
@@ -140,14 +150,14 @@
                         <div class="card-body h-100">
                             <div class="row align-items-center">
                                 <div class="col-2 text-center">
-                                    <i class="fa-solid fa-newspaper articleIcon"></i>
+                                <i class="fa-solid fa-circle-exclamation articleIcon"></i>
                                 </div>
                                 <div class="col-6 text-start">
                                     <h5 class="fs-2">Réclamations</h5>
                                     <h6>Demandes et réclamations à traiter</h6>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <h2 class="fs-1">124</h2>
+                                    <h2 class="fs-1">0</h2>
                                 </div>
                             </div>
                         </div>

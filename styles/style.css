@@ -178,4 +178,104 @@ h2{
 
 /* procedures section styling end */
 
+/* service page styling start */
+#serviceSlide {
+  height: 300px !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: contain;
+  background-image: url(../images/slide3.jpg);
+  overflow: hidden;
+}
+#serviceSlide .slide-components{
+  height: 200px;
+}
+
+#serviceSlide h1 {
+  color : #FFCB09;
+  font-size: 4.5rem;
+  font-weight: 700; 
+}
+#serviceSlide h2 {
+  color : #FFF;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+
+/* Media query screen under 720px*/
+@media screen and (max-width: 720px) {
+  #slide h1 {
+    font-size: 2.5rem; 
+    /* Adjust the font size for smaller screens */
+  }
+  #slide h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+  
+  }
+}
+
+/* service page styling end */
+
+#filter button {
+  background-color: #FFCB09;
+  color: #000;
+  padding: 10px 25px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; 
+}
+#filter button:hover {
+  background-color: #000;
+  color: #FFCB09;
+  cursor: pointer;
+  padding: 10px 30px;
+}
+
+#service a {
+  background-color: #FFCB09;
+  color: #000;
+  padding: 5px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; 
+}
+#service a:hover {
+  background-color: #000;
+  color: #FFCB09;
+  cursor: pointer;
+  padding: 10px 30px;
+}
+
+ 
+.whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 10px 20px;
+  background-color: #25d366;
+  color: #fff;
+  text-decoration: none;
+  font-size: 48px;
+}
+.whatsapp-button:hover{
+  background-color: #128c7e;
+  color: #fff;
+  padding: 10px 25px;
+  text-decoration: none;
+  font-size: 48px;
+  transition: all 0.3s ease-in-out; 
+}
+
+.whatsapp-icon {
+  margin-right: 8px;
+}
+
+.whatsapp-number {
+  margin-left: 8px;
+}
 

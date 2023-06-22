@@ -3,7 +3,7 @@
         <header class="container-fluid sticky-top bg-white">
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="./index.php">
+                    <a class="navbar-brand" href="index.php">
                         <img src="./logo/logo1500.png" alt="bricoli logo" srcset="bricoli logo" width="150">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

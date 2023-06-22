@@ -48,3 +48,5 @@ foreach ($bricoleurs as $bricoleur) {
     echo "Mot de passe: " . $bricoleur['mdp_bricoleur'] . "<br><br>";
 }
 ?>
+
+

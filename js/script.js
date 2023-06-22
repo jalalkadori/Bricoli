@@ -1,5 +1,3 @@
-
-
 /*******************
  * hide and show the password feild whene clicking on the eye icon
  *******************/

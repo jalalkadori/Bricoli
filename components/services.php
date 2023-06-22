@@ -44,7 +44,7 @@
                         <img src="./images/' . $imgSrc . '" class="card-img-top" alt="Image">
                     </div>
                     <div class="overlay">
-                        <a href="service.php?category='.urlencode($categoryName).'" class="btn ' . $buttonColor . ' rounded-pill">' . $categoryName . '</a>
+                        <a href="./pages/service.php?category='.urlencode($categoryName).'" class="btn ' . $buttonColor . ' rounded-pill">' . $categoryName . '</a>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,10 @@
     include("../db_connection.php");
     include("session-config.php");
 
+
+    // Fetch the categoryData from the JSON file
+    $categoryData = file_get_contents('../json/category.json');
+    $categories = json_decode($categoryData, true);
 ?>
 <!doctype html>
 <html lang="en">
@@ -130,7 +134,12 @@
                     
                     <select name="categorie" id="categorie" class="form-select rounded-0 border border-dark" required>
                         <option selected>Choisire une categorie</option>
-                        <!-- select option are filled from a json file using javascript -->
+                        <!-- select option are filled from a json file -->
+                        <?php foreach ($categories as $categorie) : ?>
+                            <option value="<?php echo $categorie['category']; ?>" <?php echo (isset($_POST['speciality']) == $categorie['category']) ? 'selected' : ''; ?>>
+                                <?php echo $categorie['category']; ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="mb-3">

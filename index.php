@@ -17,7 +17,7 @@
     
     <main>
         
-        <section class=" slide" id="slide">
+        <section class="slide" id="slide">
             <?php
                 // include the header code
                 include("./components/header.php");
@@ -67,54 +67,70 @@
             </div>
         </section>
 
-        <section class="container-fluid py-5" id="blog">
-            <div class="container">
+        <section class="container my-5" id="blogGallery">
+            <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="image-heading">
                     <h2 class="fs-1 fw-bold">BRICO</h2>
                     <img src="./images/blog/blog.png" alt="Description of the image" width="100" height="" class="svg-image">
                 </div>
+            </div>
+            <!-- Display the deletion result message using Bootstrap alert -->
+            <?php if (isset($message) && isset($alertClass)): ?>
+                <div class="alert <?php echo $alertClass; ?> mt-3" role="alert">
+                    <?php echo $message; ?>
+                </div>
+            <?php endif; ?>
 
-                <div id="carousel" class="carousel slide rounded" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner rounded">
-                        <div class="carousel-item active">
-                            <img src="./images/slide3.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>First slide label</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./images/slide3.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
-                                <p>Some representative placeholder content for the second slide.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./images/slide3.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Some representative placeholder content for the third slide.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                <div class="text-end my-2">
-                    <a class="text-end  fs-6">Voir tous les articles <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
+            <div class="row row-cols-1 row-cols-lg-3 text-center">
+            <?php
+                // Fetch articles from the database
+                $stmt = $db_connection->prepare("SELECT * FROM article");
+                $stmt->execute();
+                $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Display articles
+                foreach ($articles as $article) {
+                    $imgUrl = $article['img_url'];
+                    $category = $article['categorie_acticle'];
+                    $title = $article['titre_article'];
+                    $updatedAt = date("d F Y", strtotime($article['date_publication'])); // Format the date as "day month year"
+                    $articleId = $article['id_Article'];
+                    $encodedTitle = urlencode($title); // URL encode the article title
+
+                     // Define an array of personalized button colors
+                    $buttonColors = array(
+                        "Peinture" => "btn-primary",
+                        "Plomberie" => "btn-secondary",
+                        "Electricité" => "btn-danger",
+                        "Carrelage" => "btn-success",
+                        "Electroménager" => "btn-warning",
+                        "Montage de meubles" => "btn-dark"
+                    );
+                    // Determine the button color based on the category
+                    $buttonColor = isset($buttonColors[$category]) ? $buttonColors[$category] : "btn-primary";
+
+                    // HTML code for displaying the article
+                    echo '<div class="col mb-2">';
+                    echo '        <div class="card border-0 text-white rounded h-100">';
+                    echo '            <img class="card-img img-fluid h-100" src="./images/peinture.jpg" alt="Article image">';
+                    echo '            <div class="card-img-overlay d-flex flex-column justify-content-end align-items-end p-0">';
+                    echo '                <div class="text-end w-100">';
+                    echo '                    <span class="btn ' . $buttonColor . ' rounded-0">' . $category . '</span>';
+                    echo '                </div>';
+                    echo '                <div class="text-start w-100 px-2 py-1 bg-dark" style="--bs-bg-opacity: .5;">';
+                    echo '                    <h5 class="card-title">' . $title . '</h5>';
+                    echo '                    <div class="d-flex justify-content-between align-items-center">';
+                    echo '                        <small class="text-white p-0">Dernière mise à jour ' . $updatedAt . '</small>';
+                    echo '                        <a href="articles?id=' . $articleId . '&title=' . urlencode($title) . '" class="btn text-warning border-0" >Lire la suite ></a>';
+                    echo '                    </div>';
+                    echo '                </div>';
+                    echo '            </div>';
+                    echo '        </div>';
+                    echo '</div>';
+                }
+            ?>
+
+
             </div>
         </section>
 
